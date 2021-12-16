@@ -5,3 +5,11 @@
     background: aqua;
     padding: .3rem 0 .3rem .3rem;
 }
+.sidebar a{
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar a .active{
+    color: gray;
+}
