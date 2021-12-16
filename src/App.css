@@ -23,7 +23,7 @@
 
 .content {
     grid-area: con;
-    background: #d4ffdd;
+    background: white;
     padding: .3rem .3rem .3rem .3rem;
 }
 

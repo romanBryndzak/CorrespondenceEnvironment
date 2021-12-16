@@ -1,0 +1,52 @@
+.wrapper {
+    min-height: 100%;
+    border-radius: 5px;
+    background: cornflowerblue;
+}
+
+.ava {
+}
+
+.wrapper img {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 5px;
+    padding: .2rem .2rem 0 .2rem;
+}
+
+.content {
+    text-align: center;
+    margin: 2px;
+
+    background: cornsilk;
+    border-radius: 5px;
+}
+
+.posts {
+    margin: 2px;
+    border-radius: 5px;
+    background: #ececec;
+}
+
+.posts img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 5px;
+    padding: .2rem;
+}
+
+.post {
+    display: flex;
+}
+
+.comment {
+    border-radius: 5px;
+    border: 1px black solid;
+    padding: .2rem;
+    margin: .2rem;
+}
+
+.like {
+    cursor: pointer;
+    padding: .4rem;
+}
