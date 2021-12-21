@@ -1,0 +1,23 @@
+.wrapper {
+    min-height: 100%;
+    background: black;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    gap: 1px;
+}
+
+.users {
+    background: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.users a {
+    padding: .2rem 0 0 .2rem;
+    color: black;
+}
+
+.dialogs {
+    background: cornflowerblue;
+    padding: .2rem 0 0 .2rem;
+}

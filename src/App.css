@@ -24,7 +24,7 @@
 .content {
     grid-area: con;
     background: white;
-    padding: .3rem .3rem .3rem .3rem;
+    padding: .2rem .2rem .2rem .2rem;
 }
 
 .footer {

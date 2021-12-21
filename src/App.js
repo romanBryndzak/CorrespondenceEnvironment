@@ -2,7 +2,7 @@ import './App.css';
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import Main from "./Pages/Main/Main";
-import Message from "./Pages/Message/Message";
+import Messages from "./Pages/Messages/Messages";
 import Music from "./Pages/Music/Music";
 import News from "./Pages/News/News";
 import Settings from "./Pages/Settings/Settings";
@@ -17,7 +17,7 @@ function App() {
             <div className="content">
                 <Routes>
                     <Route path='/' element={<Main/>}/>
-                    <Route path='/message' element={<Message/>}/>
+                    <Route path='/messages' element={<Messages/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/settings' element={<Settings/>}/>
