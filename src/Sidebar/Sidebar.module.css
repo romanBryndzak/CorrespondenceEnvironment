@@ -4,12 +4,30 @@
     align-items: flex-start;
     background: aqua;
     padding: .3rem 0 .3rem .3rem;
+    font-size: 24px;
 }
-.sidebar a{
+
+.friend {
+    margin-top: 3rem;
+    margin-bottom: 2px;
+}
+
+.friendsAva {
+    border-radius: 30%;
+}
+
+.friendsAva img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+    padding: 3px 3px 0 3px;
+}
+
+.sidebar a {
     text-decoration: none;
     color: black;
 }
 
-.sidebar a .active{
+.sidebar a .active {
     color: gray;
 }

@@ -14,6 +14,20 @@
     padding: .2rem .2rem 0 .2rem;
 }
 
+.wrapper textarea {
+    border-radius: 3px;
+    width: 75%;
+    margin: 4px 0 0 4px;
+}
+
+.wrapper .add {
+    border-radius: 5px;
+    border: 1px gray solid;
+    background: #6495ed;
+    margin: 0 5px 4px;
+    color: white;
+}
+
 .content {
     text-align: center;
     margin: 2px;

@@ -16,6 +16,8 @@ function Main(props) {
             </div>
             <div className={s.content}>content</div>
             <div className={s.posts}>
+                <textarea>write to me</textarea>
+                <button className={s.add}>add</button>
                 {post}
             </div>
         </div>

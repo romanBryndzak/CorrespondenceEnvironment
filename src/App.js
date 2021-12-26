@@ -16,13 +16,10 @@ function App(props) {
             <div className="content">
                 <Routes>
                     <Route path='/' element={
-                        <Main posts={props.posts}/>
+                        <Main posts={props.state.posts}/>
                     }/>
                     <Route path='/messages' element={
-                        <Messages
-                            messages={props.messages}
-                            users={props.users}
-                        />
+                        <Messages state={props.state.messagesPage}/>
                     }/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/news' element={<News/>}/>
