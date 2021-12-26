@@ -1,5 +1,7 @@
 import s from "./Messages.module.css"
 import {NavLink} from "react-router-dom"
+import React from "react";
+
 
 function User(props) {
     // let path = "/messages/" + props.id
@@ -26,12 +28,22 @@ function Messages(props) {
         )
     })
 
+    const valueTextarea = React.createRef()
+    const addMessage = () => {
+        let text = valueTextarea.current.value
+        props.addMessage(text)
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.users}>
                 {user}
             </div>
             <div className={s.dialogs}>
+                 <textarea onClick={() => {valueTextarea.current.value = ""}}
+                           ref={valueTextarea}>write comment
+                </textarea>
+                <button onClick={addMessage} className={s.add}>Add</button>
                 {message}
             </div>
         </div>

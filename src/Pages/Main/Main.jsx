@@ -1,3 +1,4 @@
+import React from "react";
 import s from './Main.module.css'
 import Post from './Posts/Post'
 import {ava} from "../../img/img";
@@ -9,6 +10,12 @@ function Main(props) {
         )
     })
 
+    const valueTextarea = React.createRef()
+    const addPost = () => {
+       let text = valueTextarea.current.value
+        props.addPost(text)
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.ava}>
@@ -16,8 +23,10 @@ function Main(props) {
             </div>
             <div className={s.content}>content</div>
             <div className={s.posts}>
-                <textarea>write to me</textarea>
-                <button className={s.add}>add</button>
+                <textarea onClick={() => {valueTextarea.current.value = ""}}
+                          ref={valueTextarea}>write to me
+                </textarea>
+                <button onClick={addPost} className={s.add}>Add</button>
                 {post}
             </div>
         </div>

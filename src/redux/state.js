@@ -22,4 +22,21 @@ let state = {
     ]
 }
 
+export function addPost(text) {
+    let post = {
+        id: 4,
+        post: text,
+        like: 3
+    }
+    state.posts.push(post)
+}
+
+export function addMessage(text) {
+    let message = {
+        id: 0,
+        message: text,
+    }
+    state.messagesPage.messages.push(message)
+}
+
 export default state

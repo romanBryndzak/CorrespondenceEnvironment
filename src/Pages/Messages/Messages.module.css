@@ -4,9 +4,24 @@
     display: grid;
     grid-template-columns: 2fr 10fr;
     gap: 1px;
+    font-size: 18px;
+}
+
+.wrapper textarea {
+    border-radius: 3px;
+    width: 75%;
+    margin: 4px 0 0 4px;
+}
+
+.wrapper .add {
+    border-radius: 5px;
+    border: 1px gray solid;
+    background: #ececec;
+    margin: 0 5px 4px;
 }
 
 .users {
+    padding-top: 3rem;
     background: cornflowerblue;
     display: flex;
     flex-direction: column;
@@ -20,4 +35,5 @@
 .dialogs {
     background: cornflowerblue;
     padding: .2rem 0 0 .2rem;
+
 }

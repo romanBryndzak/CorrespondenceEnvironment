@@ -16,7 +16,6 @@ function Sidebar() {
                 <img src={ava} alt="photo"/>
                 <img src={ava} alt="photo"/>
             </div>
-
         </nav>
     );
 }
