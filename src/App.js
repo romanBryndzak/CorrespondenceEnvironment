@@ -8,16 +8,22 @@ import News from "./Pages/News/News";
 import Settings from "./Pages/Settings/Settings";
 import {Route, Routes} from "react-router-dom";
 
-
-function App() {
+function App(props) {
     return (
         <div className="App">
             <Header/>
             <Sidebar/>
             <div className="content">
                 <Routes>
-                    <Route path='/' element={<Main/>}/>
-                    <Route path='/messages' element={<Messages/>}/>
+                    <Route path='/' element={
+                        <Main posts={props.posts}/>
+                    }/>
+                    <Route path='/messages' element={
+                        <Messages
+                            messages={props.messages}
+                            users={props.users}
+                        />
+                    }/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/settings' element={<Settings/>}/>
