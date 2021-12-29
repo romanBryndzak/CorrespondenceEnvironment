@@ -15,20 +15,43 @@ let state = {
         ],
     },
 
-    posts: [
-        {id: 0, post: "Development in react is very interesting!", like: 5},
-        {id: 1, post: "Yes bro, I support your opinion.", like: 2},
-        {id: 2, post: "On my think, angular is better!", like: 0},
-    ]
+    postPage: {
+        posts: [
+            {id: 0, post: "Development in react is very interesting!", like: 5},
+            {id: 1, post: "Yes bro, I support your opinion.", like: 2},
+            {id: 2, post: "On my think, angular is better!", like: 0},
+        ],
+        textTextarea: "Write to me!"
+    }
+
 }
 
-export function addPost(text) {
+let renderEntireTree = () => {}
+
+export const subscribe = (observer) => {
+    renderEntireTree = observer
+}
+
+function increaseId(length) {
+    return length++
+}
+
+export function addPost() {
+    let text = state.postPage.textTextarea
     let post = {
-        id: 4,
+        id: increaseId(state.postPage.posts.length),
         post: text,
         like: 3
     }
-    state.posts.push(post)
+    state.postPage.posts.push(post)
+    state.postPage.textTextarea = "Write to me!"
+
+    renderEntireTree(state)
+}
+
+export function changePost(text) {
+    state.postPage.textTextarea = text
+    renderEntireTree(state)
 }
 
 export function addMessage(text) {

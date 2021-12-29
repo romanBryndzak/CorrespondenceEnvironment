@@ -12,9 +12,9 @@ function Sidebar() {
             <NavLink to="/settings">Settings</NavLink>
             <NavLink to="/" className={s.friend}>Friends</NavLink>
             <div className={s.friendsAva}>
-                <img src={ava} alt="photo"/>
-                <img src={ava} alt="photo"/>
-                <img src={ava} alt="photo"/>
+                <img src={ava} alt="ava"/>
+                <img src={ava} alt="ava"/>
+                <img src={ava} alt="ava"/>
             </div>
         </nav>
     );

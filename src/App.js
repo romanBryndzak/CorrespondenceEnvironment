@@ -7,10 +7,8 @@ import Music from "./Pages/Music/Music";
 import News from "./Pages/News/News";
 import Settings from "./Pages/Settings/Settings";
 import {Route, Routes} from "react-router-dom";
-import {addMessage} from "./redux/state";
 
 function App(props) {
-    console.log(props.state)
     return (
         <div className="App">
             <Header/>
@@ -19,8 +17,9 @@ function App(props) {
                 <Routes>
                     <Route path='/' element={
                         <Main
-                            posts={props.state.posts}
+                            postPage={props.state.postPage}
                             addPost={props.addPost}
+                            changePost={props.changePost}
                         />
                     }/>
                     <Route path='/messages' element={

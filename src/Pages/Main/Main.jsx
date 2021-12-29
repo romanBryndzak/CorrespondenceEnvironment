@@ -3,17 +3,25 @@ import s from './Main.module.css'
 import Post from './Posts/Post'
 import {ava} from "../../img/img";
 
+
 function Main(props) {
-    const post = props.posts.map(post => {
+    const post = props.postPage.posts.map(post => {
         return (
             <Post key={post.id} post={post.post} like={post.like}/>
         )
     })
 
-    const valueTextarea = React.createRef()
     const addPost = () => {
-       let text = valueTextarea.current.value
-        props.addPost(text)
+        if (props.postPage.textTextarea !== "Write to me!") {
+            props.addPost()
+        }
+    }
+
+    const handleChange = (event) => {
+        props.changePost(event.target.value)
+    }
+    const clearText = (e) => {
+        e.target.value = ""
     }
 
     return (
@@ -23,8 +31,9 @@ function Main(props) {
             </div>
             <div className={s.content}>content</div>
             <div className={s.posts}>
-                <textarea onClick={() => {valueTextarea.current.value = ""}}
-                          ref={valueTextarea}>write to me
+                <textarea onChange={handleChange}
+                          onClick={clearText}
+                          value={props.postPage.textTextarea}>
                 </textarea>
                 <button onClick={addPost} className={s.add}>Add</button>
                 {post}
