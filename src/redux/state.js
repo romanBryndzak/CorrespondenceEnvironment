@@ -73,15 +73,18 @@ let store = {
     },
 
     dispatch(action) {
-        debugger
-        if (action.type === CHANGE_MESSAGE) {
-            this.state.messagesPage.newTextMessage = action.newText
-            this._callSubscriber(this.state)
-        } else if (action.type === ADD_MESSAGE) {
-
-        } else if (action.type === CHANGE_POST) {
-            this.state.postPage.textTextarea = action.newText
-            this._callSubscriber(this.state)
+        switch (action.type) {
+            case CHANGE_MESSAGE:
+                this.state.messagesPage.newTextMessage = action.newText
+                this._callSubscriber(this.state)
+                return this.state
+            case  ADD_MESSAGE:
+                return this.state
+            case CHANGE_POST:
+                this.state.postPage.textTextarea = action.newText
+                this._callSubscriber(this.state)
+                return this.state
+            default: return this.state
         }
     },
 }
