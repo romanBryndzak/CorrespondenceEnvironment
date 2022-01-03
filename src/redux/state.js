@@ -1,5 +1,10 @@
+const CHANGE_POST = 'CHANGE_POST'
+const ADD_MESSAGE = 'ADD_MESSAGE'
+const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
+
+
 let store = {
-    state : {
+    state: {
         messagesPage: {
             users: [
                 {id: "1", name: "Roman"},
@@ -14,6 +19,7 @@ let store = {
                 {id: 2, message: "How are you?"},
                 {id: 3, message: "I am fine thanks. "},
             ],
+            newTextMessage: 'Write comment!'
         },
 
         postPage: {
@@ -31,9 +37,10 @@ let store = {
         return this.state
     },
 
-    _callSubscriber () {},
+    _callSubscriber() {
+    },
 
-    subscribe (observer){
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 
@@ -54,18 +61,31 @@ let store = {
         this._callSubscriber(this.state)
     },
 
-    changePost(text) {
-        this.state.postPage.textTextarea = text
-        this._callSubscriber(this.state)
-    },
-
     addMessage(text) {
         let message = {
-            id: 0,
+            id: this.increaseId(this.state.messagesPage.messages.length),
             message: text,
         }
         this.state.messagesPage.messages.push(message)
-    }
+        this.state.messagesPage.newTextMessage = 'Write comment!'
+
+        this._callSubscriber(this.state)
+    },
+
+    dispatch(action) {
+        debugger
+        if (action.type === CHANGE_MESSAGE) {
+            this.state.messagesPage.newTextMessage = action.newText
+            this._callSubscriber(this.state)
+        } else if (action.type === ADD_MESSAGE) {
+
+        } else if (action.type === CHANGE_POST) {
+            this.state.postPage.textTextarea = action.newText
+            this._callSubscriber(this.state)
+        }
+    },
 }
+
+export const changePostAction = (newText) => ({type: CHANGE_POST, newText: newText})
 
 export default store

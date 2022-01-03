@@ -19,13 +19,14 @@ function App(props) {
                         <Main
                             postPage={props.state.postPage}
                             addPost={props.addPost}
-                            changePost={props.changePost}
+                            dispatch={props.dispatch}
                         />
                     }/>
                     <Route path='/messages' element={
                         <Messages
                             state={props.state.messagesPage}
                             addMessage={props.addMessage}
+                            dispatch={props.dispatch}
                         />
                     }/>
                     <Route path='/music' element={<Music/>}/>

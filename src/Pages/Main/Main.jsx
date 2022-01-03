@@ -2,6 +2,7 @@ import React from "react";
 import s from './Main.module.css'
 import Post from './Posts/Post'
 import {ava} from "../../img/img";
+import {changePostAction} from "../../redux/state";
 
 function Main(props) {
     const post = props.postPage.posts.map(post => {
@@ -17,7 +18,8 @@ function Main(props) {
     }
 
     const handleChange = (event) => {
-        props.changePost(event.target.value)
+        let newText = event.target.value
+        changePostAction(newText)
     }
     const clearText = (e) => {
         e.target.value = ""
