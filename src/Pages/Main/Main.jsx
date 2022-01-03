@@ -19,7 +19,7 @@ function Main(props) {
 
     const handleChange = (event) => {
         let newText = event.target.value
-        changePostAction(newText)
+        props.dispatch(changePostAction(newText))
     }
     const clearText = (e) => {
         e.target.value = ""
