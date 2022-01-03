@@ -3,7 +3,6 @@ import s from './Main.module.css'
 import Post from './Posts/Post'
 import {ava} from "../../img/img";
 
-
 function Main(props) {
     const post = props.postPage.posts.map(post => {
         return (
