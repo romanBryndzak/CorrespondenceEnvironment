@@ -1,7 +1,7 @@
 import s from "./Messages.module.css"
 import {NavLink} from "react-router-dom"
 import React from "react";
-import {addMessageAction, changeMessageAction} from "../../redux/state";
+import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
 
 
 function User(props) {

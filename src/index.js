@@ -4,15 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import store from "./redux/state";
+import store from "./redux/store";
 
 const renderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
             <App state={state}
                  dispatch={store.dispatch.bind(store)}
-                 addPost={store.addPost.bind(store)}
-                 addMessage={store.addMessage.bind(store)}
             />
         </BrowserRouter>,
         document.getElementById('root')
