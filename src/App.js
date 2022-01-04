@@ -24,7 +24,7 @@ function App(props) {
                     }/>
                     <Route path='/messages' element={
                         <Messages
-                            state={props.state.messagesPage}
+                            messagePage={props.state.messagesPage}
                             addMessage={props.addMessage}
                             dispatch={props.dispatch}
                         />

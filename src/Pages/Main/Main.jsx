@@ -2,7 +2,7 @@ import React from "react";
 import s from './Main.module.css'
 import Post from './Posts/Post'
 import {ava} from "../../img/img";
-import {changePostAction} from "../../redux/state";
+import {addPostAction, changePostAction} from "../../redux/state";
 
 function Main(props) {
     const post = props.postPage.posts.map(post => {
@@ -11,9 +11,11 @@ function Main(props) {
         )
     })
 
+    const valueTextarea = props.postPage.newTextPost
+
     const addPost = () => {
-        if (props.postPage.textTextarea !== "Write to me!") {
-            props.addPost()
+        if (valueTextarea !== "Write to me!") {
+            props.dispatch(addPostAction())
         }
     }
 
@@ -34,7 +36,7 @@ function Main(props) {
             <div className={s.posts}>
                 <textarea onChange={handleChange}
                           onClick={clearText}
-                          value={props.postPage.textTextarea}>
+                          value={valueTextarea}>
                 </textarea>
                 <button onClick={addPost} className={s.add}>Add</button>
                 {post}

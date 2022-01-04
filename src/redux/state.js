@@ -1,6 +1,7 @@
-const CHANGE_POST = 'CHANGE_POST'
-const ADD_MESSAGE = 'ADD_MESSAGE'
-const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
+const CHANGE_POST = "CHANGE_POST"
+const ADD_POST = "ADD_POST"
+const ADD_MESSAGE = "ADD_MESSAGE"
+const CHANGE_MESSAGE = "CHANGE_MESSAGE"
 
 
 let store = {
@@ -19,7 +20,7 @@ let store = {
                 {id: 2, message: "How are you?"},
                 {id: 3, message: "I am fine thanks. "},
             ],
-            newTextMessage: 'Write comment!'
+            newTextMessage: "Write comment!"
         },
 
         postPage: {
@@ -28,7 +29,7 @@ let store = {
                 {id: 1, post: "Yes bro, I support your opinion.", like: 2},
                 {id: 2, post: "On my think, angular is better!", like: 0},
             ],
-            textTextarea: "Write to me!"
+            newTextPost: "Write to me!"
         }
 
     },
@@ -49,46 +50,61 @@ let store = {
     },
 
     addPost() {
-        let text = this.state.postPage.textTextarea
-        let post = {
-            id: this.increaseId(this.state.postPage.posts.length),
-            post: text,
-            like: 3
-        }
-        this.state.postPage.posts.push(post)
-        this.state.postPage.textTextarea = "Write to me!"
 
-        this._callSubscriber(this.state)
     },
 
     addMessage(text) {
-        let message = {
-            id: this.increaseId(this.state.messagesPage.messages.length),
-            message: text,
-        }
-        this.state.messagesPage.messages.push(message)
-        this.state.messagesPage.newTextMessage = 'Write comment!'
 
-        this._callSubscriber(this.state)
     },
 
     dispatch(action) {
         switch (action.type) {
+
             case CHANGE_MESSAGE:
                 this.state.messagesPage.newTextMessage = action.newText
+
                 this._callSubscriber(this.state)
                 return this.state
+
             case  ADD_MESSAGE:
-                return this.state
-            case CHANGE_POST:
-                this.state.postPage.textTextarea = action.newText
+                let message = {
+                    id: this.increaseId(this.state.messagesPage.messages.length),
+                    message: this.state.messagesPage.newTextMessage,
+                }
+                this.state.messagesPage.messages.push(message)
+                this.state.messagesPage.newTextMessage = "Write comment!"
+
                 this._callSubscriber(this.state)
                 return this.state
-            default: return this.state
+
+            case CHANGE_POST:
+                this.state.postPage.newTextPost = action.newText
+
+                this._callSubscriber(this.state)
+                return this.state
+
+            case ADD_POST:
+                let text = this.state.postPage.newTextPost
+                let post = {
+                    id: this.increaseId(this.state.postPage.posts.length),
+                    post: text,
+                    like: 3
+                }
+                this.state.postPage.posts.push(post)
+                this.state.postPage.newTextPost = "Write to me!"
+
+                this._callSubscriber(this.state)
+                return this.state
+
+            default:
+                return this.state
         }
     },
 }
 
 export const changePostAction = (newText) => ({type: CHANGE_POST, newText: newText})
+export const addPostAction = () => ({type: ADD_POST})
+export const changeMessageAction = (newText) => ({type: CHANGE_MESSAGE, newText: newText})
+export const addMessageAction = () => ({type: ADD_MESSAGE})
 
 export default store
