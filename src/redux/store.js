@@ -51,7 +51,6 @@ let store = {
         postPageReducer(this.state.postPage, action)
 
         this._callSubscriber(this.state)
-        return this.state
     },
 
 }
