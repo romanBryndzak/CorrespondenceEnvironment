@@ -8,7 +8,7 @@ import {Route, Routes} from "react-router-dom";
 import MainContainer from "./Pages/Main/MainContainer";
 import MessagesContainer from "./Pages/Messages/MessagesContainer";
 
-function App(props) {
+function App() {
     return (
         <div className="App">
             <Header/>
@@ -17,15 +17,10 @@ function App(props) {
                 <Routes>
                     <Route path='/' element={
                         <MainContainer
-                            postPage={props.state.postPage}
-                            dispatch={props.dispatch}
                         />
                     }/>
                     <Route path='/messages' element={
-                        <MessagesContainer
-                            messagePage={props.state.messagesPage}
-                            dispatch={props.dispatch}
-                        />
+                        <MessagesContainer/>
                     }/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/news' element={<News/>}/>

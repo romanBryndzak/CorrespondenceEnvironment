@@ -27,20 +27,26 @@ const messagePageReducer = (messagesPage = initialState, action) => {
 
     switch (action.type) {
 
-        case CHANGE_MESSAGE:
-            messagesPage.newTextMessage = action.newText
+        case CHANGE_MESSAGE: {
+            let stateCopy = {...messagesPage}
+            stateCopy.newTextMessage = action.newText
 
-            return messagesPage
+            return stateCopy
+        }
 
-        case  ADD_MESSAGE:
+        case  ADD_MESSAGE: {
+            let stateCopy = {...messagesPage}
+            stateCopy.messages = [...messagesPage.messages]
+
             let message = {
                 id: increaseId(messagesPage.messages.length),
                 message: messagesPage.newTextMessage,
             }
-            messagesPage.messages.push(message)
-            messagesPage.newTextMessage = "Write comment!"
+            stateCopy.messages.push(message)
+            stateCopy.newTextMessage = "Write comment!"
 
-            return messagesPage
+            return stateCopy
+        }
 
         default:
             return messagesPage

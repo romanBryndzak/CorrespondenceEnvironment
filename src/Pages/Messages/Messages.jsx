@@ -19,12 +19,12 @@ function Message(props) {
 
 function Messages(props) {
 
-    const message = props.messagePage.messages.map(message => {
+    const message = props.messagesPage.messages.map(message => {
         return (
             <Message key={message.id} message={message.message}/>
         )
     })
-    const user = props.messagePage.users.map(user => {
+    const user = props.messagesPage.users.map(user => {
         return (
             <User key={user.id} name={user.name} id={user.id}/>
         )

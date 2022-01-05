@@ -1,26 +1,27 @@
-import React from "react";
-import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
 import Messages from "./Messages";
+import {connect} from "react-redux";
+import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
 
-function MessagesContainer(props) {
+const mapStateToProps = (state) => {
+    return {
+        messagesPage: state.messagesPage,
+        valueTextarea: state.messagesPage.newTextMessage
+    }
+}
 
-    const valueTextarea = props.messagePage.newTextMessage
-
-    const addMessage = () => {
-        if (valueTextarea !== "Write comment!") {
-            props.dispatch(addMessageAction())
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addMessage: () => {
+            dispatch(addMessageAction())
+        },
+        changeMessage: (event) => {
+            let newText = event.target.value
+            dispatch(changeMessageAction(newText))
+            console.log(newText)
         }
     }
-
-    const changeMessage = (event) => {
-        let newText = event.target.value
-        props.dispatch(changeMessageAction(newText))
-    }
-
-    return (
-        <Messages addMessage={addMessage} changeMessage={changeMessage}
-                  valueTextarea={valueTextarea} messagePage={props.messagePage}/>
-    )
 }
+
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
 
 export default MessagesContainer;
