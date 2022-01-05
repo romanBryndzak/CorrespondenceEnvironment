@@ -1,7 +1,7 @@
 import s from "./Messages.module.css"
 import {NavLink} from "react-router-dom"
 import React from "react";
-import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
+import {clearText} from "../../redux/auxiliaryTools";
 
 
 function User(props) {
@@ -30,36 +30,18 @@ function Messages(props) {
         )
     })
 
-    const valueTextarea = props.messagePage.newTextMessage
-
-    const addMessage = () => {
-        if (valueTextarea !== "Write comment!") {
-            props.dispatch(addMessageAction())
-        }
-    }
-
-    const changeMessage = (event) => {
-        let newText = event.target.value
-        props.dispatch(changeMessageAction(newText))
-    }
-
-    const clearText = (e) => {
-        e.target.value = ""
-    }
-
-
     return (
         <div className={s.wrapper}>
             <div className={s.users}>
                 {user}
             </div>
             <div className={s.dialogs}>
-                 <textarea onChange={changeMessage}
+                 <textarea onChange={props.changeMessage}
                            onClick={clearText}
-                           value={valueTextarea}
+                           value={props.valueTextarea}
                  >
                 </textarea>
-                <button onClick={addMessage} className={s.add}>Add</button>
+                <button onClick={props.addMessage} className={s.add}>Add</button>
                 {message}
             </div>
         </div>
