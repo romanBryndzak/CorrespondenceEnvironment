@@ -30,6 +30,12 @@ function Messages(props) {
         )
     })
 
+    const onAddMessage = () => {
+        if(props.valueTextarea !== "Write comment!"){
+            props.addMessage()
+        }
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.users}>
@@ -41,7 +47,7 @@ function Messages(props) {
                            value={props.valueTextarea}
                  >
                 </textarea>
-                <button onClick={props.addMessage} className={s.add}>Add</button>
+                <button onClick={onAddMessage} className={s.add}>Add</button>
                 {message}
             </div>
         </div>

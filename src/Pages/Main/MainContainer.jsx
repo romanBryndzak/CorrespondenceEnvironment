@@ -1,27 +1,27 @@
-import React from "react";
 import {addPostAction, changePostAction} from "../../redux/postPageReducer";
 import Main from "./Main";
+import {connect} from "react-redux";
 
-function MainContainer(props) {
 
-    const valueTextarea = props.postPage.newTextPost
-    const addPost = () => {
-        if (valueTextarea !== "Write to me!") {
-            props.dispatch(addPostAction())
+const mapStateToProps = (state) => {
+    return {
+        postPage: state.postPage,
+        valueTextarea:state.postPage.newTextPost
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChange: (event) => {
+            let newText = event.target.value
+            dispatch(changePostAction(newText))
+        },
+        addPost: () => {
+            dispatch(addPostAction())
         }
     }
-
-    const handleChange = (event) => {
-        let newText = event.target.value
-        props.dispatch(changePostAction(newText))
-    }
-
-    return (
-        <Main handleChange={handleChange} addPost={addPost}
-              valueTextarea={valueTextarea}
-              postPage={props.postPage}
-        />
-    );
 }
+
+const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main)
 
 export default MainContainer;

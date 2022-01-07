@@ -11,6 +11,12 @@ function Main(props) {
         )
     })
 
+    const onAddPost = () => {
+        if (props.valueTextarea !== "Write to me!") {
+            props.addPost()
+        }
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.ava}>
@@ -22,7 +28,7 @@ function Main(props) {
                           onClick={clearText}
                           value={props.valueTextarea}>
                 </textarea>
-                <button onClick={props.addPost} className={s.add}>Add</button>
+                <button onClick={onAddPost} className={s.add}>Add</button>
                 {post}
             </div>
         </div>
