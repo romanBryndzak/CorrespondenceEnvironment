@@ -10,6 +10,7 @@ function Sidebar() {
             <NavLink to="/music">Music</NavLink>
             <NavLink to="/news">News</NavLink>
             <NavLink to="/settings">Settings</NavLink>
+            <NavLink to="/users">Users</NavLink>
             <NavLink to="/" className={s.friend}>Friends</NavLink>
             <div className={s.friendsAva}>
                 <img src={ava} alt="ava"/>

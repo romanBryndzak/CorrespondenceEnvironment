@@ -18,6 +18,7 @@ function Message(props) {
 }
 
 function Messages(props) {
+    console.log(props.messagesPage)
 
     const message = props.messagesPage.messages.map(message => {
         return (

@@ -21,6 +21,7 @@
 }
 
 .wrapper .add {
+    cursor: pointer;
     border-radius: 5px;
     border: 1px gray solid;
     background: #6495ed;

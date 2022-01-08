@@ -2,11 +2,53 @@ import {increaseId} from "./auxiliaryTools";
 
 const ADD_MESSAGE = "ADD_MESSAGE"
 const CHANGE_MESSAGE = "CHANGE_MESSAGE"
+const FOLLOW = "FOLLOW"
+const UN_FOLLOW = "UN_FOLLOW"
+const SET_USERS = "SET_USERS"
+
 
 export const changeMessageAction = (newText) => ({type: CHANGE_MESSAGE, newText: newText})
 export const addMessageAction = () => ({type: ADD_MESSAGE})
 
+
+export const following = (userId) => ({type: FOLLOW, id: userId})
+export const unFollow = (userId) => ({type: UN_FOLLOW, id: userId})
+export const setUsers = (users) => ({type: SET_USERS, users: users})
+
+
 const initialState = {
+    member: [
+        {
+            id: "1",
+            followed: false,
+            ava: "",
+            fullName: "Roman",
+            status: "I am find jod!",
+            location: {city: "L`viv", country: "Ukraine"}
+        },
+        {
+            id: "2",
+            followed: true,
+            fullName: "Maryna",
+            status: "I am fine!",
+            location: {city: "L`viv", country: "Ukraine"}
+        },
+        {
+            id: "3",
+            followed: false,
+            fullName: "Rostyslav",
+            status: "You are tired!",
+            location: {city: "Kiev", country: "Ukraine"}
+        },
+        {
+            id: "4",
+            followed: true,
+            fullName: "Snizhana",
+            status: "I look on tis book!",
+            location: {city: "L`viv", country: "Ukraine"}
+        },
+    ],
+
     users: [
         {id: "1", name: "Roman"},
         {id: "2", name: "Maryna"},
@@ -46,6 +88,33 @@ const messagePageReducer = (messagesPage = initialState, action) => {
             stateCopy.newTextMessage = "Write comment!"
 
             return stateCopy
+        }
+        case UN_FOLLOW: {
+            console.log('unfollow')
+            return {
+                ...messagesPage,
+                member: messagesPage.member.map(u => {
+                    if (u.id === action.id) {
+                        return {...u, followed: true}
+                    }
+                    return u
+                })
+            }
+        }
+        case  FOLLOW: {
+            console.log('follow')
+            return {
+                ...messagesPage, member: messagesPage.member.map(user => {
+                    if (user.id === action.id) {
+                        console.log('followInit')
+                        return {...user, followed: false}
+                    }
+                    return user
+                })
+            }
+        }
+        case  SET_USERS: {
+            return {...messagesPage, member: [...messagesPage.member, ...action.users]}
         }
 
         default:
