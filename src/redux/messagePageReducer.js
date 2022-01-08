@@ -17,37 +17,7 @@ export const setUsers = (users) => ({type: SET_USERS, users: users})
 
 
 const initialState = {
-    member: [
-        {
-            id: "1",
-            followed: false,
-            ava: "",
-            fullName: "Roman",
-            status: "I am find jod!",
-            location: {city: "L`viv", country: "Ukraine"}
-        },
-        {
-            id: "2",
-            followed: true,
-            fullName: "Maryna",
-            status: "I am fine!",
-            location: {city: "L`viv", country: "Ukraine"}
-        },
-        {
-            id: "3",
-            followed: false,
-            fullName: "Rostyslav",
-            status: "You are tired!",
-            location: {city: "Kiev", country: "Ukraine"}
-        },
-        {
-            id: "4",
-            followed: true,
-            fullName: "Snizhana",
-            status: "I look on tis book!",
-            location: {city: "L`viv", country: "Ukraine"}
-        },
-    ],
+    member: [ ],
 
     users: [
         {id: "1", name: "Roman"},

@@ -1,15 +1,18 @@
 import {connect} from "react-redux";
 import Users from "./Users";
-import {following, unFollow} from "../../redux/messagePageReducer";
+import {following, setUsers, unFollow} from "../../redux/messagePageReducer";
 
 const mapStateToProps = (state) => {
     return {
-        memberApp: state.messagesPage.member
+        users: state.messagesPage.member
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setUsers: (users) => {
+          dispatch(setUsers(users))
+    },
         following: (userId) => {
             dispatch(following(userId))
         },
