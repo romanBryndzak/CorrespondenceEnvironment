@@ -24,53 +24,45 @@ import * as axios from "axios";
 //     )
 // }
 
-// let user = props.memberApp.map(u => {
-//     return (
-//         <User key={u.id} followed={u.followed} fullName={u.fullName} status={u.status}
-//               unFollow={props.unFollow} following={props.following}/>
-//     )
-// })
 
-
-function Users(props) {
-    const addSetEffect =
-        (props) => {
-
-            if (props.users.length === 0) {
+class Users extends React.Component {
+    addSetEffect =
+        () => {
+        if (this.props.users.length === 0) {
                 axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                    debugger
-                    console.log(response.data.items)
                     const users = response.data.items
-                    props.setUsers(users)
+                    this.props.setUsers(users)
                 })
 
             }
         }
 
-    return (
-        <div>
-            <button onClick={addSetEffect}>add users</button>
-            {props.users.map(u => <div key={u.id} className={s.wrapper}>
-                <div className={s.follow}>
-                    <div><img src={u.photos.small ? u.photos.small : ava} alt=""/></div>
-                    <div>
-                        {u.followed ?
-                            <button onClick={() => {
-                                props.following(u.id)
-                            }}>follow</button>
-                            : <button onClick={() => {
-                                props.unFollow(u.id)
-                            }}>unfollow</button>}
+    render() {
+        return (
+            <div>
+                <button onClick={this.addSetEffect}>add users</button>
+                {this.props.users.map(u => <div key={u.id} className={s.wrapper}>
+                    <div className={s.follow}>
+                        <div><img src={u.photos.small ? u.photos.small : ava} alt=""/></div>
+                        <div>
+                            {u.followed ?
+                                <button onClick={() => {
+                                    this.props.following(u.id)
+                                }}>follow</button>
+                                : <button onClick={() => {
+                                    this.props.unFollow(u.id)
+                                }}>unfollow</button>}
+                        </div>
                     </div>
-                </div>
-                <div className={s.info}>
-                    <div>{u.name}</div>
-                    <div>{u.status}</div>
-                </div>
-                <div/>
-            </div>)}
-        </div>
-    )
+                    <div className={s.info}>
+                        <div>{u.name}</div>
+                        <div>{u.status}</div>
+                    </div>
+                    <div/>
+                </div>)}
+            </div>
+        )
+    }
 }
 
 export default Users
@@ -85,15 +77,6 @@ export default Users
 //             followed: false,
 //             name: "Roman",
 //             status: "I am find jod!",
-//             location: {city: "L`viv", country: "Ukraine"}
-//         },
-//         {
-//             id: "2",
-//             photos: {small: null, large: null},
-//             uniqueUrlName: "",
-//             followed: false,
-//             name: "Maryna",
-//             status: "I am fine!",
 //             location: {city: "L`viv", country: "Ukraine"}
 //         }
 //     ]
