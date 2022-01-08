@@ -60,7 +60,6 @@ const messagePageReducer = (messagesPage = initialState, action) => {
             return stateCopy
         }
         case UN_FOLLOW: {
-            console.log('unfollow')
             return {
                 ...messagesPage,
                 member: messagesPage.member.map(u => {
@@ -72,11 +71,9 @@ const messagePageReducer = (messagesPage = initialState, action) => {
             }
         }
         case  FOLLOW: {
-            console.log('follow')
             return {
                 ...messagesPage, member: messagesPage.member.map(user => {
                     if (user.id === action.id) {
-                        console.log('followInit')
                         return {...user, followed: false}
                     }
                     return user

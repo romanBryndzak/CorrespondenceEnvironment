@@ -26,21 +26,17 @@ import * as axios from "axios";
 
 
 class Users extends React.Component {
-    addSetEffect =
-        () => {
-        if (this.props.users.length === 0) {
-                axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                    const users = response.data.items
-                    this.props.setUsers(users)
-                })
-
-            }
-        }
+    constructor(props) {
+        super(props);
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            const users = response.data.items
+            this.props.setUsers(users)
+        })
+    }
 
     render() {
         return (
             <div>
-                <button onClick={this.addSetEffect}>add users</button>
                 {this.props.users.map(u => <div key={u.id} className={s.wrapper}>
                     <div className={s.follow}>
                         <div><img src={u.photos.small ? u.photos.small : ava} alt=""/></div>
