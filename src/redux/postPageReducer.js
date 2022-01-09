@@ -1,4 +1,4 @@
-import {increaseId} from "./auxiliaryTools";
+import {increaseId} from "../auxiliaryTools/auxiliaryTools";
 
 const CHANGE_POST = "CHANGE_POST"
 const ADD_POST = "ADD_POST"

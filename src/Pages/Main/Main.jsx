@@ -2,7 +2,7 @@ import React from "react";
 import s from './Main.module.css'
 import Post from './Posts/Post'
 import {ava} from "../../img/img";
-import {clearText} from "../../redux/auxiliaryTools";
+import {clearText} from "../../auxiliaryTools/auxiliaryTools";
 
 function Main(props) {
     const post = props.postPage.posts.map(post => {

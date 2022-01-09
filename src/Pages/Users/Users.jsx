@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Users.module.css"
 import {ava} from "../../img/img";
 import * as axios from "axios";
+import Paginator from "../../auxiliaryTools/paginator";
 
 // function User(props) {
 //     return (
@@ -28,16 +29,35 @@ import * as axios from "axios";
 class Users extends React.Component {
     constructor(props) {
         super(props);
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            const users = response.data.items
-            this.props.setUsers(users)
-        })
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersP.activePage}&count${this.props.usersP.amountUsers}`)
+            .then(response => {
+                const users = response.data.items
+                const amount = response.data.totalCount
+
+                this.props.setUsers(users)
+                this.props.totalCountUsers(amount)
+            })
+    }
+
+    onsetCurrentPage = (numberPage) => {
+        this.props.setCurrentPage(numberPage)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numberPage}&count${this.props.usersP.amountUsers}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+    }
+
+    componentDidMount() {
     }
 
     render() {
         return (
-            <div>
-                {this.props.users.map(u => <div key={u.id} className={s.wrapper}>
+            <div className={s.wrapperUsers}>
+                <Paginator activePage={this.props.usersP.activePage} countItems={this.props.usersP.countUsers}
+                           amountUsers={this.props.usersP.amountUsers} onsetCurrentPage={this.onsetCurrentPage}
+                           portionSize={10}
+                />
+                {this.props.users.map(u => <div key={u.id} className={s.wrapperUser}>
                     <div className={s.follow}>
                         <div><img src={u.photos.small ? u.photos.small : ava} alt=""/></div>
                         <div>

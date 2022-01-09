@@ -1,10 +1,12 @@
-import {increaseId} from "./auxiliaryTools";
+import {increaseId} from "../auxiliaryTools/auxiliaryTools";
 
 const ADD_MESSAGE = "ADD_MESSAGE"
 const CHANGE_MESSAGE = "CHANGE_MESSAGE"
 const FOLLOW = "FOLLOW"
 const UN_FOLLOW = "UN_FOLLOW"
 const SET_USERS = "SET_USERS"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const TOTAL_COUNT_USERS = "TOTAL_COUNT_USERS"
 
 
 export const changeMessageAction = (newText) => ({type: CHANGE_MESSAGE, newText: newText})
@@ -14,10 +16,15 @@ export const addMessageAction = () => ({type: ADD_MESSAGE})
 export const following = (userId) => ({type: FOLLOW, id: userId})
 export const unFollow = (userId) => ({type: UN_FOLLOW, id: userId})
 export const setUsers = (users) => ({type: SET_USERS, users: users})
+export const totalCountUsers = (amount) => ({type: TOTAL_COUNT_USERS, amount: amount})
+export const setCurrentPage = (number) => ({type: SET_CURRENT_PAGE, number: number})
 
 
 const initialState = {
-    member: [ ],
+    member: [],
+    amountUsers: 10,
+    countUsers: 0,
+    activePage: 1,
 
     users: [
         {id: "1", name: "Roman"},
@@ -81,7 +88,13 @@ const messagePageReducer = (messagesPage = initialState, action) => {
             }
         }
         case  SET_USERS: {
-            return {...messagesPage, member: [...messagesPage.member, ...action.users]}
+            return {...messagesPage, member: action.users}
+        }
+        case  TOTAL_COUNT_USERS: {
+            return {...messagesPage, countUsers: action.amount}
+        }
+        case  SET_CURRENT_PAGE: {
+            return {...messagesPage, activePage: action.number}
         }
 
         default:

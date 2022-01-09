@@ -1,0 +1,26 @@
+.paginator {
+    margin: 3px;
+    align-items: center;
+}
+
+.wrapperSpan {
+    background: #ececec;
+    border: gray 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 1px;
+}
+
+.button {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px gray solid;
+    background: #6495ed;
+    margin: 0 5px 4px;
+    padding-top: 3px;
+    color: white;
+}
+
+.active {
+    font-weight: bold;
+}

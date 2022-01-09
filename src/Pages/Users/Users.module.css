@@ -1,6 +1,8 @@
-.wrapper {
+.wrapperUsers {
+}
+
+.wrapperUser {
     min-height: 100%;
-    background: #ffffff;
     display: grid;
     grid-template-columns: 2fr 10fr;
     gap: 1px;
@@ -8,7 +10,7 @@
     border-radius: 5px;
 }
 
-.wrapper img {
+.wrapperUser img {
     max-width: 110px;
     max-height: 110px;
     border-radius: 5px;

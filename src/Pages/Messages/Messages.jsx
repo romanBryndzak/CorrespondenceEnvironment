@@ -1,7 +1,7 @@
 import s from "./Messages.module.css"
 import {NavLink} from "react-router-dom"
 import React from "react";
-import {clearText} from "../../redux/auxiliaryTools";
+import {clearText} from "../../auxiliaryTools/auxiliaryTools";
 
 
 function User(props) {
@@ -18,7 +18,6 @@ function Message(props) {
 }
 
 function Messages(props) {
-    console.log(props.messagesPage)
 
     const message = props.messagesPage.messages.map(message => {
         return (
@@ -32,7 +31,7 @@ function Messages(props) {
     })
 
     const onAddMessage = () => {
-        if(props.valueTextarea !== "Write comment!"){
+        if (props.valueTextarea !== "Write comment!") {
             props.addMessage()
         }
     }
