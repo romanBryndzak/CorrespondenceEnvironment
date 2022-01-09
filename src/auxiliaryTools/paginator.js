@@ -1,7 +1,7 @@
 import s from "./auxiliaryTools.module.css";
 import React, {useState} from "react";
 
-const Paginator = ({countItems, amountUsers, activePage, onsetCurrentPage, portionSize}) => {
+const Paginator = ({countItems, amountUsers, activePage, onSetCurrentPage, portionSize}) => {
 
     let [portionNumber, setPortionNumber] = useState(1)
 
@@ -24,7 +24,7 @@ const Paginator = ({countItems, amountUsers, activePage, onsetCurrentPage, porti
             {amountPages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
                 return <span key={p.id} className={activePage === p ? s.active : s.wrapperSpan}
                              onClick={() => {
-                                 onsetCurrentPage(p)
+                                 onSetCurrentPage(p)
                              }}>{p}</span>
             })}
             {portionCount > portionNumber && <button className={s.button} onClick={() => {
