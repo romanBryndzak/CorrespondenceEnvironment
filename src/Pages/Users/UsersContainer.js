@@ -52,28 +52,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setUsers: (users) => {
-            dispatch(setUsers(users))
-        },
-        following: (userId) => {
-            dispatch(following(userId))
-        },
-        unFollow: (userId) => {
-            dispatch(unFollow(userId))
-        },
-        totalCountUsers: (amount) => {
-            dispatch(totalCountUsers(amount))
-        },
-        setCurrentPage: (number) => {
-            dispatch(setCurrentPage(number))
-        },
-        switchIsFetching: (isFetching) => {
-            dispatch(switchIsFetching(isFetching))
-        }
-    }
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    setUsers, following, unFollow, totalCountUsers, setCurrentPage, switchIsFetching,
+})(UsersContainer)

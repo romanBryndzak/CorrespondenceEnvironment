@@ -22,7 +22,7 @@ const Paginator = ({countItems, amountUsers, activePage, onSetCurrentPage, porti
             }}>Prev</button>}
 
             {amountPages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
-                return <span key={p.id} className={activePage === p ? s.active : s.wrapperSpan}
+                return <span key={p} className={activePage === p ? s.active : s.wrapperSpan}
                              onClick={() => {
                                  onSetCurrentPage(p)
                              }}>{p}</span>

@@ -1,15 +1,22 @@
 import React from "react";
 import s from './Main.module.css'
 import Post from './Posts/Post'
-import {ava} from "../../img/img";
 import {clearText} from "../../auxiliaryTools/auxiliaryTools";
+import ProfileInfo from "./ProfileInfo";
+import Preloader from "../../auxiliaryTools/Preloader";
 
 function Main(props) {
+
     const post = props.postPage.posts.map(post => {
         return (
             <Post key={post.id} post={post.post} like={post.like}/>
         )
     })
+
+    const onChangePost = (event) => {
+        let newText = event.target.value
+        props.changePost(newText)
+    }
 
     const onAddPost = () => {
         if (props.valueTextarea !== "Write to me!") {
@@ -19,12 +26,9 @@ function Main(props) {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.ava}>
-                <img src={ava} alt="ava"/>
-            </div>
-            <div className={s.content}>content</div>
+            {props.isFetching !== false ? <Preloader/> : <ProfileInfo infoUser={props.postPage.infoUser}/>}
             <div className={s.posts}>
-                <textarea onChange={props.handleChange}
+                <textarea onChange={onChangePost}
                           onClick={clearText}
                           value={props.valueTextarea}>
                 </textarea>

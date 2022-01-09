@@ -30,11 +30,15 @@
 }
 
 .content {
-    text-align: center;
-    margin: 2px;
-
-    background: cornsilk;
+    font-size: 16px;
+    background: #d4ffdd;
     border-radius: 5px;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+}
+
+.contacts {
+    margin-left: 5%;
 }
 
 .posts {
@@ -46,7 +50,7 @@
 .posts img {
     max-width: 50px;
     max-height: 50px;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: .2rem;
 }
 

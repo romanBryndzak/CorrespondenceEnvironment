@@ -16,7 +16,7 @@ function App() {
             <Sidebar/>
             <div className="content">
                 <Routes>
-                    <Route path='/' element={
+                    <Route path='/profile' element={
                         <MainContainer
                         />
                     }/>
