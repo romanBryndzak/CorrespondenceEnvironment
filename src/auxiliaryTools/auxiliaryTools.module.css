@@ -3,6 +3,10 @@
     align-items: center;
 }
 
+.preloader {
+    margin-left: 35%;
+}
+
 .wrapperSpan {
     background: #ececec;
     border: gray 1px solid;

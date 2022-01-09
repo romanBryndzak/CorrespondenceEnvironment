@@ -7,6 +7,7 @@ const UN_FOLLOW = "UN_FOLLOW"
 const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const TOTAL_COUNT_USERS = "TOTAL_COUNT_USERS"
+const SWITCH_IS_FETCHING = "SWITCH_IS_FETCHING"
 
 
 export const changeMessageAction = (newText) => ({type: CHANGE_MESSAGE, newText: newText})
@@ -18,6 +19,7 @@ export const unFollow = (userId) => ({type: UN_FOLLOW, id: userId})
 export const setUsers = (users) => ({type: SET_USERS, users: users})
 export const totalCountUsers = (amount) => ({type: TOTAL_COUNT_USERS, amount: amount})
 export const setCurrentPage = (number) => ({type: SET_CURRENT_PAGE, number: number})
+export const switchIsFetching = (isFetching) => ({type: SWITCH_IS_FETCHING, isFetching: isFetching})
 
 
 const initialState = {
@@ -25,6 +27,7 @@ const initialState = {
     amountUsers: 10,
     countUsers: 0,
     activePage: 1,
+    isFetching: false,
 
     users: [
         {id: "1", name: "Roman"},
@@ -95,6 +98,9 @@ const messagePageReducer = (messagesPage = initialState, action) => {
         }
         case  SET_CURRENT_PAGE: {
             return {...messagesPage, activePage: action.number}
+        }
+        case  SWITCH_IS_FETCHING: {
+            return {...messagesPage, isFetching: action.isFetching}
         }
 
         default:
