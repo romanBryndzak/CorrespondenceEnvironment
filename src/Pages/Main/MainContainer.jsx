@@ -22,7 +22,7 @@ class MainContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.params.userId;
         if (!userId) {
-            userId = 15;
+            userId = 7755;
         }
 
         this.props.switchIsFetching(true)
@@ -42,6 +42,7 @@ class MainContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        userId: state.authorization.userId,
         postPage: state.postPage,
         valueTextarea: state.postPage.newTextPost,
         isFetching: state.messagesPage.isFetching

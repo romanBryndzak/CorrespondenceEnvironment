@@ -1,5 +1,4 @@
 import "./App.css";
-import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import Music from "./Pages/Music/Music";
 import News from "./Pages/News/News";
@@ -8,11 +7,13 @@ import {Route, Routes} from "react-router-dom";
 import MainContainer from "./Pages/Main/MainContainer";
 import MessagesContainer from "./Pages/Messages/MessagesContainer";
 import UsersContainer from "./Pages/Users/UsersContainer";
+import HeaderContainer from "./Header/HeaderContainer";
+import Login from "./Pages/Login";
 
 function App() {
     return (
         <div className="App">
-            <Header/>
+            <HeaderContainer/>
             <Sidebar/>
             <div className="content">
                 <Routes>
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/settings" element={<Settings/>}/>
+                    <Route path="/login" element={<Login/>}/>
                 </Routes>
 
             </div>
