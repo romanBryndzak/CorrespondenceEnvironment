@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
 import Music from "./Pages/Music/Music";
@@ -16,19 +16,17 @@ function App() {
             <Sidebar/>
             <div className="content">
                 <Routes>
-                    <Route path='/profile' element={
-                        <MainContainer
-                        />
-                    }/>
-                    <Route path='/messages' element={
+                    <Route path="/profile" element={<MainContainer/>}/>
+                    <Route path=":userId" element={<MainContainer/>}/>
+                    <Route path="/messages" element={
                         <MessagesContainer/>
                     }/>
-                    <Route path='/users' element={
+                    <Route path="/users" element={
                         <UsersContainer/>
                     }/>
-                    <Route path='/music' element={<Music/>}/>
-                    <Route path='/news' element={<News/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
+                    <Route path="/music" element={<Music/>}/>
+                    <Route path="/news" element={<News/>}/>
+                    <Route path="/settings" element={<Settings/>}/>
                 </Routes>
 
             </div>

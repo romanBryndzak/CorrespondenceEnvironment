@@ -4,12 +4,29 @@ import Main from "./Main";
 import {connect} from "react-redux";
 import * as axios from "axios";
 import {switchIsFetching} from "../../redux/messagePageReducer";
+import {useParams} from "react-router-dom";
+
+const withRouter = WrappedComponent => props => {
+    // useLocation
+    const params = useParams();
+    return (
+        <WrappedComponent
+            {...props}
+            params={params}
+        />
+    );
+};
 
 class MainContainer extends React.Component {
 
     componentDidMount() {
+        let userId = this.props.params.userId;
+        if (!userId) {
+            userId = 15;
+        }
+
         this.props.switchIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
                 this.props.switchIsFetching(false)
                 this.props.addInfoUser(response.data)
@@ -31,6 +48,7 @@ const mapStateToProps = (state) => {
     }
 }
 
+let WithRoute = withRouter(MainContainer)
 export default connect(mapStateToProps, {
     changePost, addPost, addInfoUser, switchIsFetching
-})(MainContainer)
+})(WithRoute)
