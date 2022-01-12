@@ -14,8 +14,8 @@ export const changeMessageAction = (newText) => ({type: CHANGE_MESSAGE, newText:
 export const addMessageAction = () => ({type: ADD_MESSAGE})
 
 
-export const following = (userId) => ({type: FOLLOW, id: userId})
-export const unFollow = (userId) => ({type: UN_FOLLOW, id: userId})
+export const following = (userId, followed) => ({type: FOLLOW, id: userId, followed:followed})
+export const unFollow = (userId, followed) => ({type: UN_FOLLOW, id: userId, followed:followed})
 export const setUsers = (users) => ({type: SET_USERS, users: users})
 export const totalCountUsers = (amount) => ({type: TOTAL_COUNT_USERS, amount: amount})
 export const setCurrentPage = (number) => ({type: SET_CURRENT_PAGE, number: number})
@@ -33,15 +33,11 @@ const initialState = {
         {id: "1", name: "Roman"},
         {id: "2", name: "Maryna"},
         {id: "3", name: "Rostyslav"},
-        {id: "4", name: "Snizhana"},
-        {id: "5", name: "Illia"}
     ],
     messages: [
         {id: 0, message: "Hello people!"},
         {id: 1, message: "Hi friend!"},
-        {id: 2, message: "How are you?"},
-        {id: 3, message: "I am fine thanks. "},
-    ],
+        ],
     newTextMessage: "Write comment!"
 }
 
@@ -72,11 +68,11 @@ const messagePageReducer = (messagesPage = initialState, action) => {
         case UN_FOLLOW: {
             return {
                 ...messagesPage,
-                member: messagesPage.member.map(u => {
-                    if (u.id === action.id) {
-                        return {...u, followed: true}
+                member: messagesPage.member.map(user => {
+                    if (user.id === action.id) {
+                        return {...user, followed: action.followed}
                     }
-                    return u
+                    return user
                 })
             }
         }
@@ -84,7 +80,7 @@ const messagePageReducer = (messagesPage = initialState, action) => {
             return {
                 ...messagesPage, member: messagesPage.member.map(user => {
                     if (user.id === action.id) {
-                        return {...user, followed: false}
+                        return {...user, followed: action.followed}
                     }
                     return user
                 })

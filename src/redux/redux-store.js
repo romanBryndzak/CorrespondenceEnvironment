@@ -6,7 +6,7 @@ import AuthorizationReducer from "./AuthorizationReducer";
 let reducers = combineReducers({
     postPage: postPageReducer,
     messagesPage: messagePageReducer,
-    authorization: AuthorizationReducer
+    authorization: AuthorizationReducer,
 })
 
 const store = createStore(reducers)

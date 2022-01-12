@@ -9,30 +9,26 @@ import {
     totalCountUsers,
     unFollow
 } from "../../redux/messagePageReducer";
-import * as axios from "axios";
+import {userAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
     onSetCurrentPage = (numberPage) => {
         this.props.switchIsFetching(true)
         this.props.setCurrentPage(numberPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numberPage}&count${this.props.usersP.amountUsers}`)
-            .then(response => {
-                this.props.switchIsFetching(false)
-                this.props.setUsers(response.data.items)
-            })
+        userAPI.getUser(numberPage, this.props.usersP.amountUsers).then(data => {
+            this.props.switchIsFetching(false)
+            this.props.setUsers(data.items)
+        })
     }
 
     componentDidMount() {
         this.props.switchIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersP.activePage}&count${this.props.usersP.amountUsers}`)
-            .then(response => {
-                const users = response.data.items
-                const amount = response.data.totalCount
-                this.props.switchIsFetching(false)
-                this.props.setUsers(users)
-                this.props.totalCountUsers(amount)
-            })
+        userAPI.getUser(this.props.usersP.activePage, this.props.usersP.amountUsers).then(data => {
+            this.props.switchIsFetching(false)
+            this.props.setUsers(data.items)
+            this.props.totalCountUsers(data.totalCount)
+        })
     }
 
     render() {
