@@ -16,10 +16,11 @@ const Paginator = ({countItems, amountUsers, activePage, onSetCurrentPage, porti
     const rightPortionPageNumber = portionNumber * portionSize
 
     return (
-        <div className={s.paginator}>
-            {portionNumber > 1 && <button className={s.button} onClick={() => {
+        <div className={s.paginator}>{
+            portionNumber > 1 && <button className={s.button} onClick={() => {
                 setPortionNumber(portionNumber - 1)
-            }}>Prev</button>}
+            }}>Prev</button>
+        }
 
             {amountPages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map(p => {
                 return <span key={p} className={activePage === p ? s.active : s.wrapperSpan}
