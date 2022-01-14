@@ -9,7 +9,7 @@ import {
     switchIsFetching,
     totalCountUsers,
     unFollow
-} from "../../redux/messagePageReducer";
+} from "../../redux/usersPageReducer";
 import {userAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
@@ -43,8 +43,8 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.messagesPage.member,
-        usersP: state.messagesPage
+        users: state.usersP.member,
+        usersP: state.usersP
     }
 }
 

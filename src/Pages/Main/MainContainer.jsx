@@ -3,7 +3,7 @@ import {addInfoUser, addPost, changePost} from "../../redux/postPageReducer";
 import Main from "./Main";
 import {connect} from "react-redux";
 import * as axios from "axios";
-import {switchIsFetching} from "../../redux/messagePageReducer";
+import {switchIsFetching} from "../../redux/usersPageReducer";
 import {useParams} from "react-router-dom";
 
 const withRouter = WrappedComponent => props => {

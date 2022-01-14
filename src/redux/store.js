@@ -1,4 +1,4 @@
-import messagePageReducer from "./messagePageReducer";
+import messagePageReducer from "./usersPageReducer";
 import postPageReducer from "./postPageReducer";
 
 let store = {

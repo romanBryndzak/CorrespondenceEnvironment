@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import * as axios from "axios";
-import {switchIsFetching} from "../redux/messagePageReducer";
+import {switchIsFetching} from "../redux/usersPageReducer";
 import {setUserAuthorization} from "../redux/AuthorizationReducer";
 
 class HeaderContainer extends React.Component {
