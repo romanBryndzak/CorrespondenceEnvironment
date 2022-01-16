@@ -1,24 +1,10 @@
 import React from "react";
 import s from "./Users.module.css"
 import {ava} from "../../img/img";
-import {userAPI} from "../../api/api";
 import Paginator from "../../auxiliaryTools/paginator";
 
 
 function User(props) {
-
-    const getFollowDisabled = (response, id, setD) => {
-        if (response.data.resultCode === 0) {
-            userAPI.getFollow(id)
-                .then(response => {
-                    if (response.status === 200) {
-                        props.unFollow(id, response.data)
-                        setD(id, false)
-                    }
-                })
-        }
-    }
-
     return (
         <div className={s.wrapperUsers}>
             <Paginator activePage={props.usersP.activePage} countItems={props.usersP.countUsers}
@@ -32,18 +18,11 @@ function User(props) {
                         {u.followed ?
                             <button disabled={props.followStatus.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.disableFollowBut(u.id, true)
-                                        userAPI.setUnfollow(u.id).then(response => {
-                                            getFollowDisabled(response, u.id, props.disableFollowBut)
-                                        })
-
+                                        props.follow(u.id)
                                     }}>follow</button>
                             : <button disabled={props.followStatus.some(id => id === u.id)}
                                       onClick={() => {
-                                          props.disableFollowBut(u.id, true)
-                                          userAPI.setFollow(u.id).then(response => {
-                                              getFollowDisabled(response, u.id, props.disableFollowBut)
-                                          })
+                                          props.UnFollow(u.id)
                                       }}>unfollow</button>}
                     </div>
                 </div>

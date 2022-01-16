@@ -2,34 +2,17 @@ import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    disableFollowBut,
-    following,
-    setCurrentPage,
-    setUsers,
-    switchIsFetching,
-    totalCountUsers,
-    unFollow
+    follow, getUsers, setActiveCurrentPage, UnFollow
 } from "../../redux/usersPageReducer";
-import {userAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
     onSetCurrentPage = (numberPage) => {
-        this.props.switchIsFetching(true)
-        this.props.setCurrentPage(numberPage)
-        userAPI.getUser(numberPage, this.props.usersP.amountUsers).then(data => {
-            this.props.switchIsFetching(false)
-            this.props.setUsers(data.items)
-        })
+        this.props.setActiveCurrentPage(numberPage, this.props.usersP.amountUsers)
     }
 
     componentDidMount() {
-        this.props.switchIsFetching(true)
-        userAPI.getUser(this.props.usersP.activePage, this.props.usersP.amountUsers).then(data => {
-            this.props.switchIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.totalCountUsers(data.totalCount)
-        })
+        this.props.getUsers(this.props.usersP.activePage, this.props.usersP.amountUsers)
     }
 
     render() {
@@ -49,11 +32,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    setUsers,
-    following,
-    unFollow,
-    totalCountUsers,
-    setCurrentPage,
-    switchIsFetching,
-    disableFollowBut,
+    follow, UnFollow, getUsers, setActiveCurrentPage
 })(UsersContainer)

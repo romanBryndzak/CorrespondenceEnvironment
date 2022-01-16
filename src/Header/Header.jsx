@@ -11,7 +11,7 @@ function Header(props) {
         <header className="header">
             <img src={imageForHeader} className="imageForHeader" alt='imageForHeader'/>
             <div className="containerAuthorization">
-                {props.isFetching ? <Preloader width={"50px"}/> :
+                {props.isFetchingAuth ? <Preloader width={"50px"}/> :
                     <img className="photoUserAuthorization" src={userAva} alt=""/>
                 }
                 <br/>

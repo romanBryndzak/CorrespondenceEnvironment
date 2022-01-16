@@ -1,4 +1,5 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunk from "redux-thunk"
 import postPageReducer from "./postPageReducer";
 import usersPageReducer from "./usersPageReducer";
 import AuthorizationReducer from "./AuthorizationReducer";
@@ -11,7 +12,7 @@ let reducers = combineReducers({
     authorization: AuthorizationReducer,
 })
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunk))
 
 window.store = store
 

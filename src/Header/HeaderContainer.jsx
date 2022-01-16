@@ -1,23 +1,14 @@
 import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import * as axios from "axios";
 import {switchIsFetching} from "../redux/usersPageReducer";
-import {setUserAuthorization} from "../redux/AuthorizationReducer";
+import {getAuthMe} from "../redux/AuthorizationReducer";
+
 
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        this.props.switchIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-            .then(response => {
-                this.props.switchIsFetching(false)
-                if (response.data.resultCode === 0) {
-                    const {id, email, login} = response.data.data
-                    this.props.setUserAuthorization(id, email, login)
-                }
-            })
-
+        this.props.getAuthMe()
     }
 
     render() {
@@ -28,10 +19,10 @@ class HeaderContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         infoUser: state.postPage.infoUser,
-        isFetching: state.messagesPage.isFetching
+        isFetchingAuth: state.messagesPage.isFetchingAuth
     }
 }
 
 export default connect(mapStateToProps, {
-    switchIsFetching, setUserAuthorization
+    switchIsFetching, getAuthMe
 })(HeaderContainer);

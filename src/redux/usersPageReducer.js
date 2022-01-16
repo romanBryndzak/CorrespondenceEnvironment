@@ -1,3 +1,5 @@
+import {userAPI} from "../api/api";
+
 const FOLLOW = "FOLLOW"
 const UN_FOLLOW = "UN_FOLLOW"
 const SET_USERS = "SET_USERS"
@@ -22,6 +24,7 @@ const initialState = {
     countUsers: null,
     activePage: null,
     isFetching: false,
+    isFetchingAuth: false,
     followStatus: [],
 }
 
@@ -80,6 +83,54 @@ const usersPageReducer = (usersPage = initialState, action) => {
         default:
             return usersPage
     }
+}
+
+export const getUsers = (activePage, amountUsers) => (dispatch) => {
+    dispatch(switchIsFetching(true))
+    userAPI.getUsers(activePage, amountUsers).then(data => {
+        dispatch(switchIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(totalCountUsers(data.totalCount))
+    })
+
+}
+
+export const setActiveCurrentPage = (numberPage, amountUsers) => {
+    return (dispatch) => {
+        dispatch(switchIsFetching(true))
+        dispatch(setCurrentPage(numberPage))
+        userAPI.getUsers(numberPage, amountUsers).then(data => {
+            dispatch(switchIsFetching(false))
+            dispatch(setUsers(data.items))
+
+        })
+    }
+}
+
+const getFollowDisabled = (response, id, setD, dispatch) => {
+    if (response.data.resultCode === 0) {
+        userAPI.getFollow(id)
+            .then(response => {
+                if (response.status === 200) {
+                    dispatch(unFollow(id, response.data))
+                    dispatch(setD(id, false))
+                }
+            })
+    }
+}
+
+export const follow = (userId) => (dispatch) => {
+    dispatch(disableFollowBut(userId, true))
+    userAPI.setUnfollow(userId).then(response => {
+        getFollowDisabled(response, userId, disableFollowBut, dispatch)
+    })
+}
+
+export const UnFollow = (userId) => (dispatch) => {
+    dispatch(disableFollowBut(userId, true))
+    userAPI.setFollow(userId).then(response => {
+        getFollowDisabled(response, userId, disableFollowBut, dispatch)
+    })
 }
 
 export default usersPageReducer
