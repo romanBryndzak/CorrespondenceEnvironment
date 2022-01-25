@@ -17,11 +17,11 @@ export const userAPI = {
 
     },
     setFollow(id) {
-        return (instance.post(`follow/${id}`).then(respons => respons))
+        return (instance.post(`follow/${id}`))
     },
 
     setUnfollow(id) {
-        return (instance.delete(`follow/${id}`).then(respons => respons))
+        return (instance.delete(`follow/${id}`))
     },
     getFollow(id) {
         return (instance.get(`follow/${id}`)
@@ -31,8 +31,7 @@ export const userAPI = {
 
 export const authMeAPI = {
     getAuthMe(){
-        return (instance.get(`auth/me`).then(respons => respons)
-        )
+        return (instance.get(`auth/me`))
     }
 }
 

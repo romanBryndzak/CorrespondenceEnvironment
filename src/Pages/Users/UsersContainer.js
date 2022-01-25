@@ -14,7 +14,7 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.usersP.activePage, this.props.usersP.amountUsers)
     }
-
+    
     render() {
         return (
             <div>
@@ -27,7 +27,7 @@ class UsersContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersP.member,
-        usersP: state.usersP
+        usersP: state.usersP,
     }
 }
 

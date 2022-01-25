@@ -3,12 +3,15 @@ import {switchIsFetching} from "./usersPageReducer";
 
 const USER_AUTHORIZATION = "USER_AUTHORIZATION"
 
-export const setUserAuthorization = (userId, email, login) => ({type: USER_AUTHORIZATION, data: {userId, email, login}})
+export const setUserAuthorization = (userId, email, login, authMe) => (
+    {type: USER_AUTHORIZATION, data: {userId, email, login, authMe}}
+)
 
 const initialState = {
     userId: null,
     email: null,
-    login: null
+    login: null,
+    authMe: false
 }
 
 
@@ -17,7 +20,9 @@ const AuthorizationReducer = (authorizationPage = initialState, action) => {
 
         case USER_AUTHORIZATION:
             return {
-                ...authorizationPage, ...action.data
+                ...authorizationPage,
+                ...action.data,
+                authMe: true
             }
 
         default:
@@ -25,13 +30,15 @@ const AuthorizationReducer = (authorizationPage = initialState, action) => {
     }
 }
 
-export const getAuthMe =() => (dispatch) => {
+export const getAuthMe = () => (dispatch) => {
     dispatch(switchIsFetching(true))
     authMeAPI.getAuthMe().then(response => {
+        console.log(response)
         dispatch(switchIsFetching(false))
         if (response.data.resultCode === 0) {
             const {id, email, login} = response.data.data
-            dispatch(setUserAuthorization(id, email, login))
+            let authMe = true
+            dispatch(setUserAuthorization(id, email, login, authMe))
         }
     })
 

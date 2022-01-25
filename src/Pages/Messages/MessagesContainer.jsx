@@ -1,13 +1,17 @@
 import Messages from "./Messages";
 import {connect} from "react-redux";
+import {compose} from "redux";
+import WithAuthRedireckt from "../../HOC/authRedirect";
 import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
 
 const mapStateToProps = (state) => {
     return {
         messagesPage: state.messagesPage,
-        valueTextarea: state.messagesPage.newTextMessage
+        valueTextarea: state.messagesPage.newTextMessage,
+        authMe: state.authorization.authMe
     }
 }
+
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -17,11 +21,8 @@ const mapDispatchToProps = (dispatch) => {
         changeMessage: (event) => {
             let newText = event.target.value
             dispatch(changeMessageAction(newText))
-            console.log(newText)
         }
     }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
-
-export default MessagesContainer;
+export default compose(connect(mapStateToProps, mapDispatchToProps), WithAuthRedireckt)(Messages)
