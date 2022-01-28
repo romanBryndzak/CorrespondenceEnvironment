@@ -2,9 +2,16 @@ import React from "react";
 import s from "./Users.module.css"
 import {ava} from "../../img/img";
 import Paginator from "../../auxiliaryTools/paginator";
+import {useNavigate} from "react-router-dom";
 
 
 function User(props) {
+    let navigate = useNavigate();
+
+    const redirectToProfile = (id) => {
+       navigate(`/profile/${id}`)
+    }
+
     return (
         <div className={s.wrapperUsers}>
             <Paginator activePage={props.usersP.activePage} countItems={props.usersP.countUsers}
@@ -13,7 +20,7 @@ function User(props) {
             />
             {props.users.map(u => <div key={u.id} className={s.wrapperUser}>
                 <div className={s.follow}>
-                    <div><img src={u.photos.small ? u.photos.small : ava} alt=""/></div>
+                    <img onClick={() => redirectToProfile(u.id)} src={u.photos.small ? u.photos.small : ava} alt=""/>
                     <div>
                         {u.followed ?
                             <button disabled={props.followStatus.some(id => id === u.id)}

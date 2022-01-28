@@ -2,13 +2,17 @@ import {increaseId} from "../auxiliaryTools/auxiliaryTools";
 
 const CHANGE_POST = "CHANGE_POST"
 const ADD_POST = "ADD_POST"
+const CHANGE_STATUS = "CHANGE_STATUS"
 const ADD_INFO_USER = "ADD_INFO_USER"
 
 export const changePost = (newText) => ({type: CHANGE_POST, newText: newText})
 export const addPost = () => ({type: ADD_POST})
+export const changeStatus = (newText) => ({type: CHANGE_STATUS, newText: newText})
 export const addInfoUser = (infoUser) => ({type: ADD_INFO_USER, infoUser: infoUser})
 
 const initialState = {
+    status : "",
+
     infoUser: {
         aboutMe: "",
         contacts: {
@@ -39,26 +43,30 @@ const initialState = {
     newTextPost: "Write to me!"
 }
 
-const postPageReducer = (postPage = initialState, action) => {
+const mainPageReducer = (mainPage = initialState, action) => {
     switch (action.type) {
         case CHANGE_POST:
-            return {...postPage, newTextPost: action.newText}
+            return {...mainPage, newTextPost: action.newText}
+
+        case CHANGE_STATUS:
+            return {...mainPage, status: action.newText}
+
         case ADD_INFO_USER:
-            return {...postPage, infoUser: action.infoUser}
+            return {...mainPage, infoUser: action.infoUser}
 
         case ADD_POST:
-            let text = postPage.newTextPost
-            let idNumber = increaseId(postPage.posts.length)
+            let text = mainPage.newTextPost
+            let idNumber = increaseId(mainPage.posts.length)
 
             return {
-                ...postPage,
+                ...mainPage,
                 newTextPost: "Write to me!",
-                posts: [...postPage.posts, {id: idNumber, post: text, like: 0}]
+                posts: [...mainPage.posts, {id: idNumber, post: text, like: 0}]
             }
 
         default:
-            return postPage
+            return mainPage
     }
 }
 
-export default postPageReducer;
+export default mainPageReducer;

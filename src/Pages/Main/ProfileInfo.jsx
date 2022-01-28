@@ -1,8 +1,9 @@
 import React from "react";
 import s from './Main.module.css'
 import {ava} from "../../img/img";
+import Status from "./Status";
 
-function ProfileInfo({infoUser}) {
+function ProfileInfo({infoUser, status, changeStatus}) {
 
     return (
         <div className={s.content}>
@@ -10,6 +11,7 @@ function ProfileInfo({infoUser}) {
                 <div className={s.ava}>
                     <img src={infoUser.photos.small !== null ? infoUser.photos.small : ava} alt="ava"/>
                 </div>
+                <Status status={status} changeStatus={changeStatus}/>
                 <p>fullName: {infoUser.fullName}.</p>
                 <p>About me: {infoUser.aboutMe}.</p>
                 <p>Looking for a job: {infoUser.lookingForAJob}.</p>

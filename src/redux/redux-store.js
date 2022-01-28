@@ -1,12 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk"
-import postPageReducer from "./postPageReducer";
+import mainPageReducer from "./MainPageReducer";
 import usersPageReducer from "./usersPageReducer";
 import AuthorizationReducer from "./AuthorizationReducer";
 import messagePageReducer from "./messagePageReducer";
 
 let reducers = combineReducers({
-    postPage: postPageReducer,
+    postPage: mainPageReducer,
     messagesPage: messagePageReducer,
     usersP: usersPageReducer,
     authorization: AuthorizationReducer,

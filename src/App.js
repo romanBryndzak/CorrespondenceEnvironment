@@ -9,6 +9,7 @@ import MessagesContainer from "./Pages/Messages/MessagesContainer";
 import UsersContainer from "./Pages/Users/UsersContainer";
 import HeaderContainer from "./Header/HeaderContainer";
 import Login from "./Pages/Login";
+import ProfileInfo from "./Pages/Main/ProfileInfo";
 
 function App() {
     return (
@@ -17,8 +18,9 @@ function App() {
             <Sidebar/>
             <div className="content">
                 <Routes>
-                    <Route path="/profile" element={<MainContainer/>}/>
-                    <Route path=":userId" element={<MainContainer/>}/>
+                    <Route path="/profile/*" element={<MainContainer/>}>
+                        <Route path=":userId" element={<ProfileInfo/>}/>
+                    </Route>
                     <Route path="/messages" element={
                         <MessagesContainer/>
                     }/>

@@ -1,9 +1,10 @@
 import React from "react";
 import s from './Main.module.css'
-import Post from './Posts/Post'
+import Post from './Post'
 import {clearText} from "../../auxiliaryTools/auxiliaryTools";
 import ProfileInfo from "./ProfileInfo";
 import Preloader from "../../auxiliaryTools/Preloader";
+import {Route, Routes} from "react-router-dom";
 
 function Main(props) {
 
@@ -26,7 +27,16 @@ function Main(props) {
 
     return (
         <div className={s.wrapper}>
-            {props.isFetching !== false ? <Preloader/> : <ProfileInfo infoUser={props.postPage.infoUser}/>}
+            {props.isFetching !== false
+                ?
+                <Preloader/>
+                :
+                <Routes>
+                    <Route path=":userId" element={
+                        <ProfileInfo infoUser={props.postPage.infoUser} status={props.status}
+                                     changeStatus={props.changeStatus}/>}/>
+                </Routes>
+            }
             <div className={s.posts}>
                 <textarea onChange={onChangePost}
                           onClick={clearText}

@@ -1,5 +1,5 @@
 import messagePageReducer from "./usersPageReducer";
-import postPageReducer from "./postPageReducer";
+import mainPageReducer from "./MainPageReducer";
 
 let store = {
     state: {
@@ -48,7 +48,7 @@ let store = {
 
     dispatch(action) {
         messagePageReducer(this.state.messagesPage, action)
-        postPageReducer(this.state.postPage, action)
+        mainPageReducer(this.state.postPage, action)
 
         this._callSubscriber(this.state)
     },

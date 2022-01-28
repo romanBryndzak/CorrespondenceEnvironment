@@ -1,5 +1,5 @@
-import s from './../Main.module.css'
-import {ava} from "../../../img/img";
+import s from './Main.module.css'
+import {ava} from "../../img/img";
 
 function Post(props) {
     return (

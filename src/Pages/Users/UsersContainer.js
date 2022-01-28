@@ -1,27 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
     follow, getUsers, setActiveCurrentPage, UnFollow
 } from "../../redux/usersPageReducer";
 
-class UsersContainer extends React.Component {
+function UsersContainer(props) {
 
-    onSetCurrentPage = (numberPage) => {
-        this.props.setActiveCurrentPage(numberPage, this.props.usersP.amountUsers)
+    const onSetCurrentPage = (numberPage) => {
+        props.setActiveCurrentPage(numberPage, props.usersP.amountUsers)
     }
 
-    componentDidMount() {
-        this.props.getUsers(this.props.usersP.activePage, this.props.usersP.amountUsers)
-    }
-    
-    render() {
-        return (
-            <div>
-                <Users {...this.props}
-                       onSetCurrentPage={this.onSetCurrentPage}/>
-            </div>)
-    }
+    useEffect(() => {
+        props.getUsers(props.usersP.activePage, props.usersP.amountUsers)
+    }, [])
+
+    return (
+        <div>
+            <Users {...props}
+                   onSetCurrentPage={onSetCurrentPage}/>
+        </div>)
 }
 
 const mapStateToProps = (state) => {

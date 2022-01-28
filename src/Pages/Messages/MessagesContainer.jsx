@@ -1,7 +1,7 @@
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import WithAuthRedireckt from "../../HOC/authRedirect";
+import WithAuthRedirect from "../../HOC/authRedirect";
 import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
 
 const mapStateToProps = (state) => {
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), WithAuthRedireckt)(Messages)
+export default compose(connect(mapStateToProps, mapDispatchToProps), WithAuthRedirect)(Messages)
