@@ -3,7 +3,7 @@ import s from './Main.module.css'
 import {ava} from "../../img/img";
 import Status from "./Status";
 
-function ProfileInfo({infoUser, status, changeStatus}) {
+function ProfileInfo({infoUser, status, changeStatus, updateStatus}) {
 
     return (
         <div className={s.content}>
@@ -11,7 +11,7 @@ function ProfileInfo({infoUser, status, changeStatus}) {
                 <div className={s.ava}>
                     <img src={infoUser.photos.small !== null ? infoUser.photos.small : ava} alt="ava"/>
                 </div>
-                <Status status={status} changeStatus={changeStatus}/>
+                <Status status={status} changeStatus={changeStatus} updateStatus={updateStatus}/>
                 <p>fullName: {infoUser.fullName}.</p>
                 <p>About me: {infoUser.aboutMe}.</p>
                 <p>Looking for a job: {infoUser.lookingForAJob}.</p>

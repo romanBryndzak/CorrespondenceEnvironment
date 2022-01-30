@@ -1,17 +1,21 @@
 import {increaseId} from "../auxiliaryTools/auxiliaryTools";
+import {profileAPI, userAPI} from "../api/api";
+import {setUsers, switchIsFetching, totalCountUsers} from "./usersPageReducer";
 
 const CHANGE_POST = "CHANGE_POST"
 const ADD_POST = "ADD_POST"
 const CHANGE_STATUS = "CHANGE_STATUS"
+const SET_STATUS = "SET_STATUS"
 const ADD_INFO_USER = "ADD_INFO_USER"
 
 export const changePost = (newText) => ({type: CHANGE_POST, newText: newText})
 export const addPost = () => ({type: ADD_POST})
 export const changeStatus = (newText) => ({type: CHANGE_STATUS, newText: newText})
+export const setStatus = (status) => ({type: SET_STATUS, newStatus: status})
 export const addInfoUser = (infoUser) => ({type: ADD_INFO_USER, infoUser: infoUser})
 
 const initialState = {
-    status : "",
+    status: "",
 
     infoUser: {
         aboutMe: "",
@@ -51,6 +55,9 @@ const mainPageReducer = (mainPage = initialState, action) => {
         case CHANGE_STATUS:
             return {...mainPage, status: action.newText}
 
+        case SET_STATUS:
+            return {...mainPage, status: action.newStatus}
+
         case ADD_INFO_USER:
             return {...mainPage, infoUser: action.infoUser}
 
@@ -70,3 +77,28 @@ const mainPageReducer = (mainPage = initialState, action) => {
 }
 
 export default mainPageReducer;
+
+
+export const getProfile = (userId) => (dispatch) => {
+    dispatch(switchIsFetching(true))
+    profileAPI.getProfile(userId)
+        .then(response => {
+            dispatch(switchIsFetching(false))
+            dispatch(addInfoUser(response.data))
+        })
+
+}
+
+export const getStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId).then(response => {
+        dispatch(setStatus(response.data))
+    })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+    profileAPI.putStatus(status).then(response => {
+        if (response.status === 200) {
+            dispatch(setStatus(status))
+        }
+    })
+}

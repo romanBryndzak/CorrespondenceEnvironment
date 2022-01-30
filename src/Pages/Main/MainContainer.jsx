@@ -1,9 +1,14 @@
 import React, {useEffect} from "react";
-import {addInfoUser, addPost, changePost, changeStatus} from "../../redux/MainPageReducer";
+import {
+    addPost,
+    changePost,
+    changeStatus,
+    getProfile,
+    getStatus,
+    updateStatus
+} from "../../redux/MainPageReducer";
 import Main from "./Main";
 import {connect} from "react-redux";
-import * as axios from "axios";
-import {switchIsFetching} from "../../redux/usersPageReducer";
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
@@ -21,12 +26,8 @@ function MainContainer(props) {
             userId = props.userId;
         }
 
-        props.switchIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                props.switchIsFetching(false)
-                props.addInfoUser(response.data)
-            })
+        props.getProfile(userId)
+        props.getStatus(userId)
         redirectToProfile(userId)
     }, [])
 
@@ -46,5 +47,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    changePost, addPost, addInfoUser, switchIsFetching, changeStatus
+    changePost, addPost, changeStatus, getStatus, updateStatus, getProfile
 })(MainContainer)

@@ -34,7 +34,7 @@ function Main(props) {
                 <Routes>
                     <Route path=":userId" element={
                         <ProfileInfo infoUser={props.postPage.infoUser} status={props.status}
-                                     changeStatus={props.changeStatus}/>}/>
+                                     changeStatus={props.changeStatus} updateStatus={props.updateStatus}/>}/>
                 </Routes>
             }
             <div className={s.posts}>
