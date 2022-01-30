@@ -5,14 +5,20 @@ import {connect} from "react-redux";
 import * as axios from "axios";
 import {switchIsFetching} from "../../redux/usersPageReducer";
 import {useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+
 
 function MainContainer(props) {
-
     let {userId} = useParams()
+
+    let navigate = useNavigate();
+    const redirectToProfile = (id) => {
+        navigate(`/profile/${id}`)
+    }
 
     useEffect(() => {
         if (!userId) {
-            userId = 7755;
+            userId = props.userId;
         }
 
         props.switchIsFetching(true)
@@ -21,6 +27,7 @@ function MainContainer(props) {
                 props.switchIsFetching(false)
                 props.addInfoUser(response.data)
             })
+        redirectToProfile(userId)
     }, [])
 
     return (
@@ -34,7 +41,7 @@ const mapStateToProps = (state) => {
         postPage: state.postPage,
         valueTextarea: state.postPage.newTextPost,
         isFetching: state.messagesPage.isFetching,
-        status: state.postPage.status
+        status: state.postPage.status,
     }
 }
 
