@@ -1,10 +1,10 @@
 import React from "react";
 import s from './Main.module.css'
 import Post from './Post'
-import {clearText} from "../../auxiliaryTools/auxiliaryTools";
 import ProfileInfo from "./ProfileInfo";
 import Preloader from "../../auxiliaryTools/Preloader";
 import {Route, Routes} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
 
 function Main(props) {
 
@@ -14,15 +14,20 @@ function Main(props) {
         )
     })
 
-    const onChangePost = (event) => {
-        let newText = event.target.value
-        props.changePost(newText)
+    function postF(props){
+        return(
+            <form onSubmit={props.handleSubmit}>
+                <Field name='post' component='textarea' type='text' placeholder='write in me'/>
+                <button type='submit' className={s.add}>Add</button>
+            </form>
+        )
     }
-
-    const onAddPost = () => {
-        if (props.valueTextarea !== "Write to me!") {
-            props.addPost()
+    const ReduxPost = reduxForm({form:'postText'})(postF)
+    function PostForm(props){
+        const onSubmit = data => {
+            props.addPost(data.post)
         }
+        return <ReduxPost onSubmit={onSubmit}/>
     }
 
     return (
@@ -38,11 +43,7 @@ function Main(props) {
                 </Routes>
             }
             <div className={s.posts}>
-                <textarea onChange={onChangePost}
-                          onClick={clearText}
-                          value={props.valueTextarea}>
-                </textarea>
-                <button onClick={onAddPost} className={s.add}>Add</button>
+                <PostForm addPost={props.addPost}/>
                 {post}
             </div>
         </div>

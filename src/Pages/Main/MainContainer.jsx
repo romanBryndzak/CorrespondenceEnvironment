@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {
     addPost,
-    changePost,
     changeStatus,
     getProfile,
     getStatus,
@@ -47,5 +46,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    changePost, addPost, changeStatus, getStatus, updateStatus, getProfile
+    addPost, changeStatus, getStatus, updateStatus, getProfile
 })(MainContainer)

@@ -8,7 +8,7 @@ import MainContainer from "./Pages/Main/MainContainer";
 import MessagesContainer from "./Pages/Messages/MessagesContainer";
 import UsersContainer from "./Pages/Users/UsersContainer";
 import HeaderContainer from "./Header/HeaderContainer";
-import Login from "./Pages/Login";
+import Login from "./Pages/Login/Login";
 import ProfileInfo from "./Pages/Main/ProfileInfo";
 
 function App() {

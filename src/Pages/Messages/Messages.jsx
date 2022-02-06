@@ -1,13 +1,30 @@
 import s from "./Messages.module.css"
 import {NavLink} from "react-router-dom"
 import React from "react";
-import {clearText} from "../../auxiliaryTools/auxiliaryTools";
+import {Field, reduxForm} from "redux-form";
 
 
 function User(props) {
-    // let path = "/messages/" + props.id
     return (
         <NavLink to={"/messages/"}>{props.name}</NavLink>
+    )
+}
+
+function MesForm(props) {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field name='message' component='textarea' type='text' placeholder='write me'/>
+            <button type='submit' className={s.add}>Add</button>
+        </form>
+    )
+}
+
+const ReduxForm = reduxForm({form: 'message'})(MesForm)
+
+function MessageForm(props) {
+    let onSubmit = formData => props.addMessage(formData.message)
+    return (
+        <ReduxForm onSubmit={onSubmit}/>
     )
 }
 
@@ -30,24 +47,13 @@ function Messages(props) {
         )
     })
 
-    const onAddMessage = () => {
-        if (props.valueTextarea !== "Write comment!") {
-            props.addMessage()
-        }
-    }
-
     return (
         <div className={s.wrapper}>
             <div className={s.users}>
                 {user}
             </div>
             <div className={s.dialogs}>
-                 <textarea onChange={props.changeMessage}
-                           onClick={clearText}
-                           value={props.valueTextarea}
-                 >
-                </textarea>
-                <button onClick={onAddMessage} className={s.add}>Add</button>
+                <MessageForm addMessage={props.addMessage}/>
                 {message}
             </div>
         </div>

@@ -2,7 +2,7 @@ import Messages from "./Messages";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import WithAuthRedirect from "../../HOC/authRedirect";
-import {addMessageAction, changeMessageAction} from "../../redux/messagePageReducer";
+import {addMessage} from "../../redux/messagePageReducer";
 
 const mapStateToProps = (state) => {
     return {
@@ -12,17 +12,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: () => {
-            dispatch(addMessageAction())
-        },
-        changeMessage: (event) => {
-            let newText = event.target.value
-            dispatch(changeMessageAction(newText))
-        }
-    }
-}
-
-export default compose(connect(mapStateToProps, mapDispatchToProps), WithAuthRedirect)(Messages)
+export default compose(connect(mapStateToProps, {addMessage}), WithAuthRedirect)(Messages)

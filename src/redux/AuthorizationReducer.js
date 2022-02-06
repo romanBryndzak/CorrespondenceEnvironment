@@ -33,7 +33,6 @@ const AuthorizationReducer = (authorizationPage = initialState, action) => {
 export const getAuthMe = () => (dispatch) => {
     dispatch(switchIsFetching(true))
     authMeAPI.getAuthMe().then(response => {
-        console.log(response)
         dispatch(switchIsFetching(false))
         if (response.data.resultCode === 0) {
             const {id, email, login} = response.data.data
