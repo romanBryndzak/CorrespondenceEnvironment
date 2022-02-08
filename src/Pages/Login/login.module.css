@@ -1,14 +1,23 @@
-.form {
-    margin: 2rem 0 0 3rem;
-    font-size: 20px;
+.wrapper {
+    display: flex;
+    margin: 0 auto;
 }
 
-.form div{
-    margin-bottom: 1rem;
+.form {
+    max-width: 200px;
+    font-size: 20px;
+    padding: .5rem 2rem .5rem 2rem;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.form div {
+    margin-bottom: .5rem;
     display: grid;
 }
 
 .text {
-    width: 200px;
+    min-width: 180px;
     margin-top: .5rem;
 }

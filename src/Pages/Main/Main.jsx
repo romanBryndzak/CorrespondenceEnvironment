@@ -5,25 +5,32 @@ import ProfileInfo from "./ProfileInfo";
 import Preloader from "../../auxiliaryTools/Preloader";
 import {Route, Routes} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
+import {maxLength, requiredTextarea} from "../../auxiliaryTools/fieldValidator";
+import {Textarea} from "../../auxiliaryTools/auxiliaryTools";
 
 function Main(props) {
 
+    const maxLengthText = maxLength(15)
     const post = props.postPage.posts.map(post => {
         return (
             <Post key={post.id} post={post.post} like={post.like}/>
         )
     })
 
-    function postF(props){
-        return(
+    function postF(props) {
+        return (
             <form onSubmit={props.handleSubmit}>
-                <Field name='post' component='textarea' type='text' placeholder='write in me'/>
+                <Field name='post' component={Textarea} type='text' placeholder='write in me'
+                       validate={[requiredTextarea, maxLengthText]}
+                />
                 <button type='submit' className={s.add}>Add</button>
             </form>
         )
     }
-    const ReduxPost = reduxForm({form:'postText'})(postF)
-    function PostForm(props){
+
+    const ReduxPost = reduxForm({form: 'postText'})(postF)
+
+    function PostForm(props) {
         const onSubmit = data => {
             props.addPost(data.post)
         }
