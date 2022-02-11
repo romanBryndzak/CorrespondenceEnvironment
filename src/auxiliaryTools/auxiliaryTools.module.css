@@ -25,6 +25,10 @@
     color: white;
 }
 
+.error {
+    color: red;
+}
+
 .active {
     font-weight: bold;
 }
