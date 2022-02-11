@@ -1,15 +1,15 @@
 import "./App.css";
-import Sidebar from "./Sidebar/Sidebar";
-import Music from "./Pages/Music/Music";
-import News from "./Pages/News/News";
-import Settings from "./Pages/Settings/Settings";
+import Sidebar from "./component/Sidebar/Sidebar";
+import Music from "./component/Music/Music";
+import News from "./component/News/News";
+import Settings from "./component/Settings/Settings";
 import {Route, Routes} from "react-router-dom";
-import MainContainer from "./Pages/Main/MainContainer";
-import MessagesContainer from "./Pages/Messages/MessagesContainer";
-import UsersContainer from "./Pages/Users/UsersContainer";
-import HeaderContainer from "./Header/HeaderContainer";
-import Login from "./Pages/Login/Login";
-import ProfileInfo from "./Pages/Main/ProfileInfo";
+import MainContainer from "./component/Main/MainContainer";
+import MessagesContainer from "./component/Messages/MessagesContainer";
+import UsersContainer from "./component/Users/UsersContainer";
+import HeaderContainer from "./component/Header/HeaderContainer";
+import Login from "./component/Login/Login";
+import ProfileInfo from "./component/Main/ProfileInfo";
 
 function App() {
     return (

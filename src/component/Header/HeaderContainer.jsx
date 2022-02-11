@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {switchIsFetching} from "../redux/usersPageReducer";
-import {getAuthMe, logout} from "../redux/AuthorizationReducer";
+import {switchIsFetching} from "../../redux/usersPageReducer";
+import {getAuthMe, logout} from "../../redux/AuthorizationReducer";
 
 
 class HeaderContainer extends React.Component {

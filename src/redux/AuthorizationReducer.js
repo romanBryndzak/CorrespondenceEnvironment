@@ -1,5 +1,6 @@
 import {authMeAPI} from "../api/api";
 import {switchIsFetching} from "./usersPageReducer";
+import {stopSubmit} from "redux-form";
 
 const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
@@ -38,15 +39,18 @@ export const getAuthMe = () => (dispatch) => {
             let authMe = true;
             dispatch(setUserAuthorization(id, email, login, authMe));
         }
-    })
+    });
 };
 
 export const login = (email, password, rememberMe) => (dispatch) => {
     authMeAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getAuthMe());
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
+            dispatch(stopSubmit('login', {_error: message}));
         }
-    })
+    });
 };
 
 export const logout = () => (dispatch) => {
@@ -54,7 +58,7 @@ export const logout = () => (dispatch) => {
         if (response.data.resultCode === 0) {
             dispatch(setUserAuthorization({id: null, email: null, login: null, authMe: false}));
         }
-    })
-}
+    });
+};
 
 export default AuthorizationReducer;

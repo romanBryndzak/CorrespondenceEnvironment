@@ -1,6 +1,6 @@
 import s from './Sidebar.module.css'
 import {NavLink} from "react-router-dom";
-import {ava} from "../img/img";
+import {ava} from "../../img/img";
 
 function Sidebar() {
     return (

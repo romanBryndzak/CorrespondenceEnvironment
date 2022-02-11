@@ -1,6 +1,6 @@
 import './Header.css';
-import {ava, imageForHeader} from "../img/img";
-import Preloader from "../auxiliaryTools/Preloader";
+import {ava, imageForHeader} from "../../img/img";
+import Preloader from "../../auxiliaryTools/Preloader";
 import React from "react";
 import {NavLink} from "react-router-dom";
 
@@ -18,8 +18,8 @@ function Header(props) {
             <div className="containerAuthorization">
                 {props.isFetchingAuth ? <Preloader width={"50px"}/> :
                     <div>
+                        {props.authMe ? <div>{props.infoUser.fullName}</div> : <div>.</div>}
                         <img className="photoUserAuthorization" src={userAva} alt=""/>
-                        {props.authMe ? <div>{props.infoUser.fullName}</div> : ''}
                     </div>
                 }
                 {props.authMe
@@ -28,7 +28,7 @@ function Header(props) {
                         props.logout()
                     }}>logout</button>
                     :
-                    <NavLink style={{color: "white"}} to={"/login"}>Login</NavLink>
+                    <NavLink to={"/login"}><button>login</button></NavLink>
                 }
             </div>
         </header>

@@ -1,0 +1,31 @@
+.header {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+.imageForHeader {
+    width: 100%;
+    height: 100%;
+}
+
+.containerAuthorization {
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    width: 6%;
+    float: right;
+    text-align: center;
+}
+
+.containerAuthorization button {
+    background-color: steelblue;
+    border: none;
+    border-radius: 10px;
+}
+
+.photoUserAuthorization {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}

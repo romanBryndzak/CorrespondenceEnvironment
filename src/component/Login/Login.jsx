@@ -26,6 +26,7 @@ let LoginForm = (props) => {
             <label htmlFor='remember'>remember</label>
             <Field name='remember' component={Input} type='checkbox'/>
         </div>
+        <div className={props.error ? s.error : ''}>{props.error}</div>
         <button type='submit'>Submit
         </button>
     </form>);
