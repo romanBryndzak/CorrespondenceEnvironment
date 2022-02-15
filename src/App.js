@@ -10,8 +10,15 @@ import UsersContainer from "./component/Users/UsersContainer";
 import HeaderContainer from "./component/Header/HeaderContainer";
 import Login from "./component/Login/Login";
 import ProfileInfo from "./component/Main/ProfileInfo";
+import {connect} from "react-redux";
+import {getAuthMe} from "./redux/AuthorizationReducer";
+import React, {useEffect} from "react";
 
-function App() {
+function App(props) {
+    useEffect(() => {
+        props.getAuthMe();
+    }, []);
+
     return (
         <div className="App">
             <HeaderContainer/>
@@ -21,12 +28,8 @@ function App() {
                     <Route path="/profile/*" element={<MainContainer/>}>
                         <Route path=":userId" element={<ProfileInfo/>}/>
                     </Route>
-                    <Route path="/messages" element={
-                        <MessagesContainer/>
-                    }/>
-                    <Route path="/users" element={
-                        <UsersContainer/>
-                    }/>
+                    <Route path="/messages" element={<MessagesContainer/>}/>
+                    <Route path="/" element={<UsersContainer/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/settings" element={<Settings/>}/>
@@ -39,4 +42,4 @@ function App() {
     );
 }
 
-export default App;
+export default connect(null, {getAuthMe})(App);

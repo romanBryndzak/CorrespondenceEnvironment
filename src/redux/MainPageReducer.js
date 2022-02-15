@@ -6,7 +6,9 @@ const ADD_POST = "ADD_POST";
 const CHANGE_STATUS = "CHANGE_STATUS";
 const SET_STATUS = "SET_STATUS";
 const ADD_INFO_USER = "ADD_INFO_USER";
+const DISABLE_NAV_LINK_SIDEBAR = 'DISABLE_NAV_LINK_SIDEBAR';
 
+export const setDisableNavLinkSidebar = (value) => ({type: DISABLE_NAV_LINK_SIDEBAR, value: value});
 export const addPost = (newText) => ({type: ADD_POST, newText: newText});
 export const changeStatus = (newText) => ({type: CHANGE_STATUS, newText: newText});
 export const setStatus = (status) => ({type: SET_STATUS, newStatus: status});
@@ -42,6 +44,7 @@ const initialState = {
         {id: 1, post: "Yes bro, I support your opinion.", like: 2},
         {id: 2, post: "On my think, angular is better!", like: 0},
     ],
+    disableNavLinkSidebar: false,
 };
 
 const mainPageReducer = (mainPage = initialState, action) => {
@@ -63,6 +66,9 @@ const mainPageReducer = (mainPage = initialState, action) => {
                 ...mainPage,
                 posts: [...mainPage.posts, {id: idNumber, post: text, like: 0}]
             };
+
+        case DISABLE_NAV_LINK_SIDEBAR:
+            return {...mainPage, disableNavLinkSidebar: action.value};
 
         default:
             return mainPage;

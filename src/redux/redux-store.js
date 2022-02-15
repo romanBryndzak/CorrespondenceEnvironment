@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import thunk from "redux-thunk"
+import thunk from "redux-thunk";
 import mainPageReducer from "./MainPageReducer";
 import usersPageReducer from "./usersPageReducer";
 import AuthorizationReducer from "./AuthorizationReducer";
@@ -11,11 +11,11 @@ let reducers = combineReducers({
     messagesPage: messagePageReducer,
     usersP: usersPageReducer,
     authorization: AuthorizationReducer,
-    form: formReducer
-})
+    form: formReducer,
+});
 
-const store = createStore(reducers, applyMiddleware(thunk))
+const store = createStore(reducers, applyMiddleware(thunk));
 
-window.store = store
+window.store = store;
 
-export default store
+export default store;

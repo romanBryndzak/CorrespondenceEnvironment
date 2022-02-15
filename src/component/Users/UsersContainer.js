@@ -4,31 +4,32 @@ import Users from "./Users";
 import {
     follow, getUsers, setActiveCurrentPage, UnFollow
 } from "../../redux/usersPageReducer";
+import {setDisableNavLinkSidebar} from "../../redux/MainPageReducer";
 
 function UsersContainer(props) {
 
     const onSetCurrentPage = (numberPage) => {
-        props.setActiveCurrentPage(numberPage, props.usersP.amountUsers)
-    }
+        props.setActiveCurrentPage(numberPage, props.usersP.amountUsers);
+    };
 
     useEffect(() => {
-        props.getUsers(props.usersP.activePage, props.usersP.amountUsers)
-    }, [])
+        props.getUsers(props.usersP.activePage, props.usersP.amountUsers);
+    }, []);
 
     return (
         <div>
             <Users {...props}
                    onSetCurrentPage={onSetCurrentPage}/>
-        </div>)
+        </div>);
 }
 
 const mapStateToProps = (state) => {
     return {
         users: state.usersP.member,
         usersP: state.usersP,
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, {
-    follow, UnFollow, getUsers, setActiveCurrentPage
-})(UsersContainer)
+    follow, UnFollow, getUsers, setActiveCurrentPage, setDisableNavLinkSidebar
+})(UsersContainer);

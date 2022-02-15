@@ -5,15 +5,10 @@ import {switchIsFetching} from "../../redux/usersPageReducer";
 import {getAuthMe, logout} from "../../redux/AuthorizationReducer";
 
 
-class HeaderContainer extends React.Component {
+function HeaderContainer(props) {
 
-    componentDidMount() {
-        this.props.getAuthMe();
-    };
+    return (<Header {...props}/>);
 
-    render() {
-        return (<Header {...this.props}/>);
-    };
 }
 
 const mapStateToProps = (state) => {

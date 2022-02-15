@@ -1,17 +1,31 @@
-import s from './Sidebar.module.css'
+import s from './Sidebar.module.css';
 import {NavLink} from "react-router-dom";
 import {ava} from "../../img/img";
+import {connect} from "react-redux";
+import {setDisableNavLinkSidebar} from "../../redux/MainPageReducer";
 
-function Sidebar() {
+
+function Sidebar({disableNavLinkSidebar, setDisableNavLinkSidebar}) {
+
+    function disable(e) {
+        setDisableNavLinkSidebar(e);
+    }
+
     return (
         <nav className={s.sidebar}>
-            <NavLink to="/profile" >Profile</NavLink>
-            <NavLink to="/messages">Messages</NavLink>
-            <NavLink to="/music">Music</NavLink>
-            <NavLink to="/news">News</NavLink>
-            <NavLink to="/settings">Settings</NavLink>
-            <NavLink to="/users">Users</NavLink>
-            <NavLink to="/" className={s.friend}>Friends</NavLink>
+            <NavLink to="/profile" className={disableNavLinkSidebar ? s.disabledLink : s.active}
+                     onClick={() => disable(true)}
+            >
+                Profile
+            </NavLink>
+            <NavLink to="/messages" onClick={() => disable(false)}>
+                Messages
+            </NavLink>
+            <NavLink to="/music" onClick={() => disable(false)}>Music</NavLink>
+            <NavLink to="/news" onClick={() => disable(false)}>News</NavLink>
+            <NavLink to="/settings" onClick={() => disable(false)}>Settings</NavLink>
+            <NavLink to="/" onClick={() => disable(false)}>Users</NavLink>
+            <NavLink to="/" className={s.friend} onClick={() => disable(false)}>Friends</NavLink>
             <div className={s.friendsAva}>
                 <img src={ava} alt="ava"/>
                 <img src={ava} alt="ava"/>
@@ -21,4 +35,10 @@ function Sidebar() {
     );
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+    return {
+        disableNavLinkSidebar: state.postPage.disableNavLinkSidebar
+    };
+};
+
+export default connect(mapStateToProps, {setDisableNavLinkSidebar})(Sidebar);

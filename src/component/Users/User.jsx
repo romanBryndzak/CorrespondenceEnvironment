@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./Users.module.css"
+import s from "./Users.module.css";
 import {ava} from "../../img/img";
 import Paginator from "../../auxiliaryTools/paginator";
 import {useNavigate} from "react-router-dom";
@@ -9,8 +9,9 @@ function User(props) {
     let navigate = useNavigate();
 
     const redirectToProfile = (id) => {
-       navigate(`/profile/${id}`)
-    }
+       navigate(`/profile/${id}`);
+        props.setDisableNavLinkSidebar(true);
+    };
 
     return (
         <div className={s.wrapperUsers}>
@@ -40,7 +41,7 @@ function User(props) {
                 <div/>
             </div>)}
         </div>
-    )
+    );
 }
 
-export default User
+export default User;

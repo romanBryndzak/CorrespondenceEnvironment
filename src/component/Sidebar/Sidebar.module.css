@@ -28,6 +28,10 @@
     color: black;
 }
 
-.sidebar a .active {
+.active {
     color: gray;
+}
+
+.disabledLink {
+    pointer-events: none;
 }
