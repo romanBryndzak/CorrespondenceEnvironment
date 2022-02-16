@@ -14,8 +14,8 @@ function HeaderContainer(props) {
 const mapStateToProps = (state) => {
     return {
         authMe: state.authorization.authMe,
-        infoUser: state.postPage.infoUser,
-        isFetchingAuth: state.messagesPage.isFetchingAuth,
+        infoUser: state.profilePage.infoUser,
+        isFetching: state.profilePage.isFetching,
     };
 };
 

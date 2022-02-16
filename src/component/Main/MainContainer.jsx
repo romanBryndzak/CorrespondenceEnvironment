@@ -38,10 +38,11 @@ function MainContainer(props) {
 const mapStateToProps = (state) => {
     return {
         userId: state.authorization.userId,
-        postPage: state.postPage,
-        valueTextarea: state.postPage.newTextPost,
-        isFetching: state.messagesPage.isFetching,
-        status: state.postPage.status,
+        profilePage: state.profilePage,
+        posts: state.profilePage.posts,
+        valueTextarea: state.profilePage.newTextPost,
+        isFetching: state.profilePage.isFetching,
+        status: state.profilePage.status,
     };
 }
 

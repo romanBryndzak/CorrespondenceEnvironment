@@ -34,7 +34,6 @@ const initialState = {
     countUsers: null,
     activePage: null,
     isFetching: false,
-    isFetchingAuth: false,
     followStatus: [],
 };
 

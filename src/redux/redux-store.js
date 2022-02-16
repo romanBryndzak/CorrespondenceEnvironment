@@ -7,7 +7,7 @@ import messagePageReducer from "./messagePageReducer";
 import {reducer as formReducer} from 'redux-form';
 
 let reducers = combineReducers({
-    postPage: mainPageReducer,
+    profilePage: mainPageReducer,
     messagesPage: messagePageReducer,
     usersP: usersPageReducer,
     authorization: AuthorizationReducer,

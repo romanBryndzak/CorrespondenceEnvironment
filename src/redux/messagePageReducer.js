@@ -1,12 +1,10 @@
 import {increaseId} from "../auxiliaryTools/auxiliaryTools";
 
 const ADD_MESSAGE = "ADD_MESSAGE";
-const SWITCH_IS_FETCHING = "SWITCH_IS_FETCHING";
 
 export const addMessage = (newText) => ({type: ADD_MESSAGE, newText: newText});
 
 const initialState = {
-    isFetching: false,
     users: [
         {id: "1", name: "Roman"},
         {id: "2", name: "Maryna"},
@@ -33,10 +31,6 @@ const messagePageReducer = (messagesPage = initialState, action) => {
             stateCopy.messages.push(message)
 
             return stateCopy
-        }
-        case
-        SWITCH_IS_FETCHING: {
-            return {...messagesPage, isFetching: action.isFetching}
         }
 
         default:

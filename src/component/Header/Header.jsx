@@ -4,31 +4,35 @@ import Preloader from "../../auxiliaryTools/Preloader";
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-function Header(props) {
+function Header({authMe, isFetching, ...props}) {
+    const {photos, fullName} = props.infoUser;
+
     let userAva;
-    if (props.infoUser.photos.small === null) {
+    if (photos.small === null) {
         userAva = ava;
     } else {
-        userAva = props.infoUser.photos.small;
+        userAva = photos.small;
     }
 
     return (
         <header className="header">
             <img src={imageForHeader} className="imageForHeader" alt='imageForHeader'/>
             <div className="containerAuthorization">
-                {props.isFetchingAuth ? <Preloader width={"50px"}/> :
+                {isFetching ? <Preloader width={"50px"}/> :
                     <div>
-                        {props.authMe ? <div>{props.infoUser.fullName}</div> : <div>.</div>}
+                        {authMe ? <div>{fullName}</div> : <div>.</div>}
                         <img className="photoUserAuthorization" src={userAva} alt=""/>
                     </div>
                 }
-                {props.authMe
+                {authMe
                     ?
                     <button onClick={() => {
                         props.logout()
                     }}>logout</button>
                     :
-                    <NavLink to={"/login"}><button>login</button></NavLink>
+                    <NavLink to={"/login"}>
+                        <button>login</button>
+                    </NavLink>
                 }
             </div>
         </header>

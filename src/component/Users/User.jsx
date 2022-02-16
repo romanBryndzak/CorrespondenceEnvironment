@@ -3,21 +3,27 @@ import s from "./Users.module.css";
 import {ava} from "../../img/img";
 import Paginator from "../../auxiliaryTools/paginator";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setDisableNavLinkSidebar} from "../../redux/MainPageReducer";
+import {GetUsers} from "../../redux/selectors";
 
 
 function User(props) {
-    const {follow, UnFollow, setDisableNavLinkSidebar, onSetCurrentPage} = props;
+    const users = useSelector(GetUsers)
+    const dispatch = useDispatch();
+
+    const {follow, UnFollow, onSetCurrentPage} = props;
     const {followStatus, activePage, countUsers, amountUsers} = props.usersP;
-    const users = props.usersP.member;
+    // const users = props.usersP.member;
     let navigate = useNavigate();
 
     const redirectToProfile = (id) => {
         navigate(`/profile/${id}`);
-        setDisableNavLinkSidebar(true);
+        dispatch(setDisableNavLinkSidebar(true));
     };
 
     return (
-        <div className={s.wrapperUsers}>
+        <div>
             <Paginator activePage={activePage} countItems={countUsers} portionSize={10}
                        amountUsers={amountUsers} onSetCurrentPage={onSetCurrentPage}
             />

@@ -13,6 +13,7 @@ const initialState = {
     email: null,
     login: null,
     authMe: false,
+    isFetchingAuth: false,
 };
 
 

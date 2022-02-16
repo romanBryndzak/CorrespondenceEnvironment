@@ -37,7 +37,7 @@ function Sidebar({disableNavLinkSidebar, setDisableNavLinkSidebar}) {
 
 const mapStateToProps = (state) => {
     return {
-        disableNavLinkSidebar: state.postPage.disableNavLinkSidebar
+        disableNavLinkSidebar: state.profilePage.disableNavLinkSidebar
     };
 };
 

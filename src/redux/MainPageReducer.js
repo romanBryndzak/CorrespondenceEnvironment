@@ -16,6 +16,7 @@ export const addInfoUser = (infoUser) => ({type: ADD_INFO_USER, infoUser: infoUs
 
 const initialState = {
     status: "",
+    isFetching: false,
 
     infoUser: {
         aboutMe: "",

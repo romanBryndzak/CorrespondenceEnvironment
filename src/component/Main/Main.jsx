@@ -8,10 +8,10 @@ import {Field, reduxForm} from "redux-form";
 import {maxLength, requiredTextarea} from "../../auxiliaryTools/fieldValidator";
 import {Textarea} from "../../auxiliaryTools/auxiliaryTools";
 
-function Main(props) {
+function Main({posts, ...props}) {
 
     const maxLengthText = maxLength(15);
-    const post = props.postPage.posts.map(post => {
+    const post = posts.map(post => {
         return (
             <Post key={post.id} post={post.post} like={post.like}/>
         );
@@ -45,7 +45,7 @@ function Main(props) {
                 :
                 <Routes>
                     <Route path=":userId" element={
-                        <ProfileInfo infoUser={props.postPage.infoUser} status={props.status}
+                        <ProfileInfo infoUser={props.profilePage.infoUser} status={props.status}
                                      changeStatus={props.changeStatus} updateStatus={props.updateStatus}/>}/>
                 </Routes>
             }
