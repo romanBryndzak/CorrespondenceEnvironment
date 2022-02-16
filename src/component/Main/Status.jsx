@@ -1,23 +1,23 @@
 import React, {useState} from "react";
+import s from "./Main.module.css"
 
 function Status({status, changeStatus, updateStatus}) {
-    const [statusIn, changeStatusOn] = useState(true)
+    const [statusIn, changeStatusOn] = useState(true);
 
     const onChangeStatus = (event) => {
-        let text = event.target.value
-        changeStatus(text)
-    }
+        let text = event.target.value;
+        changeStatus(text);
+    };
     let changeStatusTrue = (status) => {
-        changeStatusOn(true)
-        updateStatus(status)
-
-    }
+        changeStatusOn(true);
+        updateStatus(status);
+    };
 
     return (
         <div>
             {statusIn === true &&
                 <div>
-                    <span style={{marginRight: '5px', background: 'yellowgreen'}}>{status}</span>
+                    <span className={s.status}>{status}</span>
                     <button onClick={() => changeStatusOn(false)}>Edit</button>
                 </div>}
             {statusIn === false &&

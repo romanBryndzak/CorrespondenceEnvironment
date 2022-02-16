@@ -6,31 +6,33 @@ import {useNavigate} from "react-router-dom";
 
 
 function User(props) {
+    const {follow, UnFollow, setDisableNavLinkSidebar, onSetCurrentPage} = props;
+    const {followStatus, activePage, countUsers, amountUsers} = props.usersP;
+    const users = props.usersP.member;
     let navigate = useNavigate();
 
     const redirectToProfile = (id) => {
-       navigate(`/profile/${id}`);
-        props.setDisableNavLinkSidebar(true);
+        navigate(`/profile/${id}`);
+        setDisableNavLinkSidebar(true);
     };
 
     return (
         <div className={s.wrapperUsers}>
-            <Paginator activePage={props.usersP.activePage} countItems={props.usersP.countUsers}
-                       amountUsers={props.usersP.amountUsers} onSetCurrentPage={props.onSetCurrentPage}
-                       portionSize={10}
+            <Paginator activePage={activePage} countItems={countUsers} portionSize={10}
+                       amountUsers={amountUsers} onSetCurrentPage={onSetCurrentPage}
             />
-            {props.users.map(u => <div key={u.id} className={s.wrapperUser}>
+            {users.map(u => <div key={u.id} className={s.wrapperUser}>
                 <div className={s.follow}>
                     <img onClick={() => redirectToProfile(u.id)} src={u.photos.small ? u.photos.small : ava} alt=""/>
                     <div>
                         {u.followed ?
-                            <button disabled={props.followStatus.some(id => id === u.id)}
+                            <button disabled={followStatus.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.follow(u.id)
+                                        follow(u.id)
                                     }}>follow</button>
-                            : <button disabled={props.followStatus.some(id => id === u.id)}
+                            : <button disabled={followStatus.some(id => id === u.id)}
                                       onClick={() => {
-                                          props.UnFollow(u.id)
+                                          UnFollow(u.id)
                                       }}>unfollow</button>}
                     </div>
                 </div>

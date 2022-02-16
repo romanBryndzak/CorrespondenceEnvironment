@@ -4,9 +4,6 @@
     background: cornflowerblue;
 }
 
-.ava {
-}
-
 .wrapper img {
     max-width: 150px;
     max-height: 150px;
@@ -68,4 +65,10 @@
 .like {
     cursor: pointer;
     padding: .4rem;
+}
+
+.status {
+    margin-right: 5px;
+    background: honeydew;
+    padding: 2px;
 }

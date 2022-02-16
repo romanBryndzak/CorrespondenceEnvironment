@@ -1,4 +1,6 @@
 import s from './auxiliaryTools.module.css'
+import {Field} from "redux-form";
+import React from "react";
 
 export const increaseId = (length) => {
     return length++
@@ -25,4 +27,15 @@ export const Input = ({input, meta: {touched, error}, ...props}) => {
 
         </div>
     )
+}
+
+export const ReturnFieldForm = (name, component, type, className, validate) => {
+    return (
+        <div>
+            <label htmlFor={name}>email</label>
+            <Field name={name} component={component} type={type} className={className}
+                   validate={validate}
+            />
+        </div>
+    );
 }

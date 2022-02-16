@@ -1,22 +1,32 @@
 import {userAPI} from "../api/api";
 
-const FOLLOW = "FOLLOW"
-const UN_FOLLOW = "UN_FOLLOW"
-const SET_USERS = "SET_USERS"
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const TOTAL_COUNT_USERS = "TOTAL_COUNT_USERS"
-const SWITCH_IS_FETCHING = "SWITCH_IS_FETCHING"
-const DISABLE_FOLLOW_BUT = "DISABLE_FOLLOW_BUT"
+const FOLLOW = "FOLLOW";
+const UN_FOLLOW = "UN_FOLLOW";
+const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const TOTAL_COUNT_USERS = "TOTAL_COUNT_USERS";
+const SWITCH_IS_FETCHING = "SWITCH_IS_FETCHING";
+const DISABLE_FOLLOW_BUT = "DISABLE_FOLLOW_BUT";
 
 
-export const following = (userId, followed) => ({type: FOLLOW, id: userId, followed: followed})
-export const unFollow = (userId, followed) => ({type: UN_FOLLOW, id: userId, followed: followed})
-export const setUsers = (users) => ({type: SET_USERS, users: users})
-export const totalCountUsers = (amount) => ({type: TOTAL_COUNT_USERS, amount: amount})
-export const setCurrentPage = (number) => ({type: SET_CURRENT_PAGE, number: number})
-export const switchIsFetching = (isFetching) => ({type: SWITCH_IS_FETCHING, isFetching: isFetching})
-export const disableFollowBut = (id, isFetching) => ({type: DISABLE_FOLLOW_BUT, id: id, isFetching: isFetching})
+export const following = (userId, followed) => ({type: FOLLOW, id: userId, followed: followed});
+export const unFollow = (userId, followed) => ({type: UN_FOLLOW, id: userId, followed: followed});
+export const setUsers = (users) => ({type: SET_USERS, users: users});
+export const totalCountUsers = (amount) => ({type: TOTAL_COUNT_USERS, amount: amount});
+export const setCurrentPage = (number) => ({type: SET_CURRENT_PAGE, number: number});
+export const switchIsFetching = (isFetching) => ({type: SWITCH_IS_FETCHING, isFetching: isFetching});
+export const disableFollowBut = (id, isFetching) => ({type: DISABLE_FOLLOW_BUT, id: id, isFetching: isFetching});
 
+const updateUserFollowing = (items, itemId, newObjectProps) => {
+    return (
+        items.map(user => {
+            if (user.id === itemId) {
+                return {...user, followed: newObjectProps};
+            }
+            return user;
+        })
+    );
+};
 
 const initialState = {
     member: [],
@@ -26,7 +36,7 @@ const initialState = {
     isFetching: false,
     isFetchingAuth: false,
     followStatus: [],
-}
+};
 
 const usersPageReducer = (usersPage = initialState, action) => {
 
@@ -35,22 +45,13 @@ const usersPageReducer = (usersPage = initialState, action) => {
         case UN_FOLLOW: {
             return {
                 ...usersPage,
-                member: usersPage.member.map(user => {
-                    if (user.id === action.id) {
-                        return {...user, followed: action.followed}
-                    }
-                    return user
-                })
+                member: updateUserFollowing(usersPage.member, action.id, action.followed),
             }
         }
         case  FOLLOW: {
             return {
-                ...usersPage, member: usersPage.member.map(user => {
-                    if (user.id === action.id) {
-                        return {...user, followed: action.followed}
-                    }
-                    return user
-                })
+                ...usersPage,
+                member: updateUserFollowing(usersPage.member, action.id, action.followed),
             }
         }
         case  DISABLE_FOLLOW_BUT: {
@@ -65,72 +66,66 @@ const usersPageReducer = (usersPage = initialState, action) => {
         }
         case
         SET_USERS: {
-            return {...usersPage, member: action.users}
+            return {...usersPage, member: action.users};
         }
         case
         TOTAL_COUNT_USERS: {
-            return {...usersPage, countUsers: action.amount}
+            return {...usersPage, countUsers: action.amount};
         }
         case
         SET_CURRENT_PAGE: {
-            return {...usersPage, activePage: action.number}
+            return {...usersPage, activePage: action.number};
         }
         case
         SWITCH_IS_FETCHING: {
-            return {...usersPage, isFetching: action.isFetching}
+            return {...usersPage, isFetching: action.isFetching};
         }
 
         default:
-            return usersPage
+            return usersPage;
     }
-}
+};
 
-export const getUsers = (activePage, amountUsers) => (dispatch) => {
-    dispatch(switchIsFetching(true))
-    userAPI.getUsers(activePage, amountUsers).then(data => {
-        dispatch(switchIsFetching(false))
-        dispatch(setUsers(data.items))
-        dispatch(totalCountUsers(data.totalCount))
-    })
+export const getUsers = (activePage, amountUsers) => async (dispatch) => {
+    dispatch(switchIsFetching(true));
+    const data = await userAPI.getUsers(activePage, amountUsers);
+    dispatch(switchIsFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(totalCountUsers(data.totalCount));
+};
 
-}
+export const setActiveCurrentPage = (numberPage, amountUsers) => async (dispatch) => {
+    dispatch(switchIsFetching(true));
+    dispatch(setCurrentPage(numberPage));
+    const data = await userAPI.getUsers(numberPage, amountUsers);
+    dispatch(switchIsFetching(false));
+    dispatch(setUsers(data.items));
+};
 
-export const setActiveCurrentPage = (numberPage, amountUsers) => {
-    return (dispatch) => {
-        dispatch(switchIsFetching(true))
-        dispatch(setCurrentPage(numberPage))
-        userAPI.getUsers(numberPage, amountUsers).then(data => {
-            dispatch(switchIsFetching(false))
-            dispatch(setUsers(data.items))
-
-        })
-    }
-}
-
-const getFollowDisabled = (response, id, setD, dispatch) => {
+const getFollowDisabled = async (id, setUnD, setD, apiMethod, updateFollowing, dispatch) => {
+    dispatch(setD(id, true));
+    let response = await apiMethod(id);
     if (response.data.resultCode === 0) {
-        userAPI.getFollow(id)
-            .then(response => {
-                if (response.status === 200) {
-                    dispatch(unFollow(id, response.data))
-                    dispatch(setD(id, false))
-                }
-            })
+        const response = await userAPI.getFollow(id);
+        if (response.status === 200) {
+            dispatch(updateFollowing(id, response.data));
+            dispatch(setUnD(id, false));
+        }
     }
-}
+};
 
-export const follow = (userId) => (dispatch) => {
-    dispatch(disableFollowBut(userId, true))
-    userAPI.setUnfollow(userId).then(response => {
-        getFollowDisabled(response, userId, disableFollowBut, dispatch)
-    })
-}
+export const follow = (userId) => async (dispatch) => {
+    await getFollowDisabled(userId, disableFollowBut, disableFollowBut, userAPI.setUnfollow.bind(userAPI), following, dispatch);
+};
 
-export const UnFollow = (userId) => (dispatch) => {
-    dispatch(disableFollowBut(userId, true))
-    userAPI.setFollow(userId).then(response => {
-        getFollowDisabled(response, userId, disableFollowBut, dispatch)
-    })
-}
+export const UnFollow = (userId) => async (dispatch) => {
+    await getFollowDisabled(userId, disableFollowBut, disableFollowBut, userAPI.setFollow.bind(userAPI), unFollow, dispatch);
+};
 
-export default usersPageReducer
+export default usersPageReducer;
+
+// export const UnFollow = (userId) => async (dispatch) => {
+// dispatch(disableFollowBut(userId, true));
+// const response = await userAPI.setFollow(userId);
+// getFollowDisabled(response, userId, disableFollowBut, dispatch);
+// };

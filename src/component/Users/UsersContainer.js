@@ -25,7 +25,6 @@ function UsersContainer(props) {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersP.member,
         usersP: state.usersP,
     };
 };

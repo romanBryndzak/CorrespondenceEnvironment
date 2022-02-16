@@ -4,30 +4,33 @@ import {ava} from "../../img/img";
 import Status from "./Status";
 
 function ProfileInfo({infoUser, status, changeStatus, updateStatus}) {
+    const {small} = infoUser.photos;
+    const {fullName, aboutMe, lookingForAJob, lookingForAJobDescription} = infoUser;
+    const {facebook, website, vk, twitter, instagram, youtube, github, mainLink} = infoUser.contacts;
 
     return (
         <div className={s.content}>
             <div>
-                <div className={s.ava}>
-                    <img src={infoUser.photos.small !== null ? infoUser.photos.small : ava} alt="ava"/>
+                <div>
+                    <img src={small !== null ? small : ava} alt="ava"/>
                 </div>
                 <Status status={status} changeStatus={changeStatus} updateStatus={updateStatus}/>
-                <p>fullName: {infoUser.fullName}.</p>
-                <p>About me: {infoUser.aboutMe}.</p>
-                <p>Looking for a job: {infoUser.lookingForAJob}.</p>
-                <p>Looking for a job description:{infoUser.lookingForAJobDescription}.</p>
+                <p>fullName: {fullName}</p>
+                <p>About me: {aboutMe}</p>
+                <p>Looking for a job: {lookingForAJob}</p>
+                <p>Looking for a job description:{lookingForAJobDescription}</p>
             </div>
             <div>
                 <p style={{fontWeight: "bold"}}>Contacts</p>
                 <div className={s.contacts}>
-                    <p>facebook: {infoUser.contacts.facebook}</p>
-                    <p>website: {infoUser.contacts.website}</p>
-                    <p>vk: {infoUser.contacts.vk}</p>
-                    <p>twitter: {infoUser.contacts.twitter}</p>
-                    <p>instagram: {infoUser.contacts.instagram}</p>
-                    <p>youtube: {infoUser.contacts.youtube}</p>
-                    <p>github: {infoUser.contacts.github}</p>
-                    <p>mainLink: {infoUser.contacts.mainLink}</p>
+                    <p>facebook: {facebook}</p>
+                    <p>website: {website}</p>
+                    <p>vk: {vk}</p>
+                    <p>twitter: {twitter}</p>
+                    <p>instagram: {instagram}</p>
+                    <p>youtube: {youtube}</p>
+                    <p>github: {github}</p>
+                    <p>mainLink: {mainLink}</p>
                 </div>
             </div>
         </div>

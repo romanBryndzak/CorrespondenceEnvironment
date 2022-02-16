@@ -1,13 +1,12 @@
 import {increaseId} from "../auxiliaryTools/auxiliaryTools";
 
-const ADD_MESSAGE = "ADD_MESSAGE"
-const SWITCH_IS_FETCHING = "SWITCH_IS_FETCHING"
+const ADD_MESSAGE = "ADD_MESSAGE";
+const SWITCH_IS_FETCHING = "SWITCH_IS_FETCHING";
 
-export const addMessage = (newText) => ({type: ADD_MESSAGE, newText: newText})
+export const addMessage = (newText) => ({type: ADD_MESSAGE, newText: newText});
 
 const initialState = {
     isFetching: false,
-
     users: [
         {id: "1", name: "Roman"},
         {id: "2", name: "Maryna"},
@@ -17,7 +16,7 @@ const initialState = {
         {id: 0, message: "Hello people!"},
         {id: 1, message: "Hi friend!"},
     ]
-}
+};
 
 const messagePageReducer = (messagesPage = initialState, action) => {
 
@@ -43,6 +42,6 @@ const messagePageReducer = (messagesPage = initialState, action) => {
         default:
             return messagesPage
     }
-}
+};
 
-export default messagePageReducer
+export default messagePageReducer;

@@ -1,4 +1,4 @@
-import s from './Main.module.css'
+import s from "./Main.module.css";
 import {ava} from "../../img/img";
 
 function Post(props) {
@@ -10,7 +10,7 @@ function Post(props) {
                 <i className="fa fa-thumbs-up"/> {props.like}
             </span>
         </div>
-    )
+    );
 }
 
 export default Post;

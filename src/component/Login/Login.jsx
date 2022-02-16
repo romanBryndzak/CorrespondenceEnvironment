@@ -1,35 +1,27 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
 import s from './login.module.css';
-import {Input} from "../../auxiliaryTools/auxiliaryTools";
+import {Input, ReturnFieldForm} from "../../auxiliaryTools/auxiliaryTools";
 import {maxLength, required} from "../../auxiliaryTools/fieldValidator";
 import {connect} from "react-redux";
 import {login} from "../../redux/AuthorizationReducer";
 import {useNavigate} from "react-router-dom";
+import {setDisableNavLinkSidebar} from "../../redux/MainPageReducer";
 
 let LoginForm = (props) => {
-    return (<form onSubmit={props.handleSubmit} className={s.form}>
-        <h3>Login</h3>
-        <div>
-            <label htmlFor='email'>email</label>
-            <Field name='email' component={Input} type='email' className={s.text}
-                   validate={[required]}
-            />
-        </div>
-        <div>
-            <label htmlFor='password'>password</label>
-            <Field name='password' component={Input} type='password' className={s.text}
-                   validate={[required, props.maxLengthPass]}
-            />
-        </div>
-        <div>
-            <label htmlFor='remember'>remember</label>
-            <Field name='remember' component={Input} type='checkbox'/>
-        </div>
-        <div className={props.error ? s.error : ''}>{props.error}</div>
-        <button type='submit'>Submit
-        </button>
-    </form>);
+    function onClick() {
+        props.setDisableNavLinkSidebar(true);
+    }
+
+    return (
+        <form onSubmit={props.handleSubmit} className={s.form}>
+            <h3>Login</h3>
+            {ReturnFieldForm('email', Input, 'email', s.text, [required])}
+            {ReturnFieldForm('password', Input, 'password', s.text, [required, props.maxLengthPass])}
+            {ReturnFieldForm('remember', Input, 'checkbox', null, null)}
+            <div className={props.error ? s.error : ''}>{props.error}</div>
+            <button type='submit' onClick={onClick}>Submit</button>
+        </form>);
 };
 
 const ReduxForm = reduxForm({form: 'login'})(LoginForm);
@@ -37,7 +29,7 @@ const ReduxForm = reduxForm({form: 'login'})(LoginForm);
 function Login(props) {
 
     let navigate = useNavigate();
-    redirectToProfile(props.id)
+    redirectToProfile(props.id);
 
     function redirectToProfile(id) {
         if (props.authMe) {
@@ -52,7 +44,9 @@ function Login(props) {
     }
     return (
         <div className={s.wrapper}>
-            <ReduxForm onSubmit={onSubmit} maxLengthPass={maxLengthPass}/>
+            <ReduxForm onSubmit={onSubmit} maxLengthPass={maxLengthPass}
+                       setDisableNavLinkSidebar={props.setDisableNavLinkSidebar}
+            />
         </div>
     );
 }
@@ -64,4 +58,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, {setDisableNavLinkSidebar, login})(Login);

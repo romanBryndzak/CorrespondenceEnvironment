@@ -1,6 +1,6 @@
 import React from "react";
-import s from './Main.module.css'
-import Post from './Post'
+import s from "./Main.module.css";
+import Post from "./Post";
 import ProfileInfo from "./ProfileInfo";
 import Preloader from "../../auxiliaryTools/Preloader";
 import {Route, Routes} from "react-router-dom";
@@ -10,12 +10,12 @@ import {Textarea} from "../../auxiliaryTools/auxiliaryTools";
 
 function Main(props) {
 
-    const maxLengthText = maxLength(15)
+    const maxLengthText = maxLength(15);
     const post = props.postPage.posts.map(post => {
         return (
             <Post key={post.id} post={post.post} like={post.like}/>
-        )
-    })
+        );
+    });
 
     function postF(props) {
         return (
@@ -25,16 +25,16 @@ function Main(props) {
                 />
                 <button type='submit' className={s.add}>Add</button>
             </form>
-        )
+        );
     }
 
-    const ReduxPost = reduxForm({form: 'postText'})(postF)
+    const ReduxPost = reduxForm({form: 'postText'})(postF);
 
     function PostForm(props) {
         const onSubmit = data => {
-            props.addPost(data.post)
+            props.addPost(data.post);
         }
-        return <ReduxPost onSubmit={onSubmit}/>
+        return <ReduxPost onSubmit={onSubmit}/>;
     }
 
     return (

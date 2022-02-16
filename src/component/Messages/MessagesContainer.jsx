@@ -8,8 +8,8 @@ const mapStateToProps = (state) => {
     return {
         messagesPage: state.messagesPage,
         valueTextarea: state.messagesPage.newTextMessage,
-        authMe: state.authorization.authMe
-    }
+        authMe: state.authorization.authMe,
+    };
 }
 
-export default compose(connect(mapStateToProps, {addMessage}), WithAuthRedirect)(Messages)
+export default compose(connect(mapStateToProps, {addMessage}), WithAuthRedirect)(Messages);

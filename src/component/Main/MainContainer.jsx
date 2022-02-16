@@ -4,7 +4,7 @@ import {
     changeStatus,
     getProfile,
     getStatus,
-    updateStatus
+    updateStatus,
 } from "../../redux/MainPageReducer";
 import Main from "./Main";
 import {connect} from "react-redux";
@@ -13,11 +13,11 @@ import {useNavigate} from "react-router-dom";
 
 
 function MainContainer(props) {
-    let {userId} = useParams()
+    let {userId} = useParams();
 
     let navigate = useNavigate();
     const redirectToProfile = (id) => {
-        navigate(`/profile/${id}`)
+        navigate(`/profile/${id}`);
     }
 
     useEffect(() => {
@@ -25,14 +25,14 @@ function MainContainer(props) {
             userId = props.userId;
         }
 
-        props.getProfile(userId)
-        props.getStatus(userId)
-        redirectToProfile(userId)
-    }, [])
+        props.getProfile(userId);
+        props.getStatus(userId);
+        redirectToProfile(userId);
+    }, []);
 
     return (
         <Main {...props}/>
-    )
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -42,9 +42,9 @@ const mapStateToProps = (state) => {
         valueTextarea: state.postPage.newTextPost,
         isFetching: state.messagesPage.isFetching,
         status: state.postPage.status,
-    }
+    };
 }
 
 export default connect(mapStateToProps, {
     addPost, changeStatus, getStatus, updateStatus, getProfile
-})(MainContainer)
+})(MainContainer);

@@ -30,35 +30,33 @@ const AuthorizationReducer = (authorizationPage = initialState, action) => {
     }
 };
 
-export const getAuthMe = () => (dispatch) => {
+export const getAuthMe = () => async (dispatch) => {
     dispatch(switchIsFetching(true));
-    authMeAPI.getAuthMe().then(response => {
-        dispatch(switchIsFetching(false));
-        if (response.data.resultCode === 0) {
-            const {id, email, login} = response.data.data;
-            let authMe = true;
-            dispatch(setUserAuthorization(id, email, login, authMe));
-        }
-    });
+    const response = await authMeAPI.getAuthMe();
+    dispatch(switchIsFetching(false));
+    if (response.data.resultCode === 0) {
+        const {id, email, login} = response.data.data;
+        let authMe = true;
+        dispatch(setUserAuthorization(id, email, login, authMe));
+    }
+
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-    authMeAPI.login(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthMe());
-        } else {
-            let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
-            dispatch(stopSubmit('login', {_error: message}));
-        }
-    });
+export const login = (email, password, rememberMe) => async (dispatch) => {
+    const response = await authMeAPI.login(email, password, rememberMe);
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthMe());
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
+        dispatch(stopSubmit('login', {_error: message}));
+    }
 };
 
-export const logout = () => (dispatch) => {
-    authMeAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setUserAuthorization({id: null, email: null, login: null, authMe: false}));
-        }
-    });
+export const logout = () => async (dispatch) => {
+    const response = await authMeAPI.logout();
+    if (response.data.resultCode === 0) {
+        dispatch(setUserAuthorization({id: null, email: null, login: null, authMe: false}));
+    }
 };
 
 export default AuthorizationReducer;

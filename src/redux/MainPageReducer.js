@@ -78,25 +78,21 @@ const mainPageReducer = (mainPage = initialState, action) => {
 export default mainPageReducer;
 
 
-export const getProfile = (userId) => (dispatch) => {
+export const getProfile = (userId) => async (dispatch) => {
     dispatch(switchIsFetching(true));
-    profileAPI.getProfile(userId)
-        .then(response => {
-            dispatch(switchIsFetching(false));
-            dispatch(addInfoUser(response.data));
-        });
+    const response = await profileAPI.getProfile(userId);
+    dispatch(switchIsFetching(false));
+    dispatch(addInfoUser(response.data));
 };
 
-export const getStatus = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data));
-    });
+export const getStatus = (userId) => async (dispatch) => {
+    const response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data));
 };
 
-export const updateStatus = (status) => (dispatch) => {
-    profileAPI.putStatus(status).then(response => {
-        if (response.status === 200) {
-            dispatch(setStatus(status));
-        }
-    });
+export const updateStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.putStatus(status);
+    if (response.status === 200) {
+        dispatch(setStatus(status));
+    }
 };
