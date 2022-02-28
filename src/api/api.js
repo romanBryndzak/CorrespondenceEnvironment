@@ -50,5 +50,8 @@ export const profileAPI = {
     putStatus(status) {
         return (instance.put(`profile/status`, {status: status}));
     },
+    putProfileIfo(profile) {
+        return (instance.put(`profile`, profile));
+    },
 };
 

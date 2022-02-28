@@ -29,12 +29,13 @@ export const Input = ({input, meta: {touched, error}, ...props}) => {
     )
 }
 
-export const ReturnFieldForm = (name, component, type, className, validate) => {
+export const ReturnFieldForm = (classNameWrap, labelName, name, component, type, className, validate, rows, cols, props) => {
+
     return (
-        <div>
-            <label htmlFor={name}>email</label>
+        <div className={classNameWrap}>
+            <label htmlFor={name} style={{marginRight: "5px"}}>{labelName}</label>
             <Field name={name} component={component} type={type} className={className}
-                   validate={validate}
+                   validate={validate} rows={rows} cols={cols} {...props}
             />
         </div>
     );

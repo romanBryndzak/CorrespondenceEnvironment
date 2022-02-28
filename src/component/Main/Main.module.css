@@ -72,3 +72,15 @@
     background: honeydew;
     padding: 2px;
 }
+
+.wrapperStatus {
+    margin-top: 7px;
+}
+
+.wrapperCustomField {
+    display: flex;
+}
+
+.buttonChangeInfo {
+    margin-top: 14px;
+}

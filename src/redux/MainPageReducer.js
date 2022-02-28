@@ -97,3 +97,10 @@ export const updateStatus = (status) => async (dispatch) => {
         dispatch(setStatus(status));
     }
 };
+
+export const changeProfileInfo = (profile, userId) => async (dispatch) => {
+    const response = await profileAPI.putProfileIfo(profile);
+    if (response.data.resultCode === 0) {
+        dispatch(getProfile(userId));
+    }
+};

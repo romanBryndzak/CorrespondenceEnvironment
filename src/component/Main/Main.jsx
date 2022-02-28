@@ -3,12 +3,14 @@ import s from "./Main.module.css";
 import Post from "./Post";
 import ProfileInfo from "./ProfileInfo";
 import Preloader from "../../auxiliaryTools/Preloader";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, requiredTextarea} from "../../auxiliaryTools/fieldValidator";
 import {Textarea} from "../../auxiliaryTools/auxiliaryTools";
 
-function Main({posts, ...props}) {
+function Main({posts, userId, authMe, ...props}) {
+    let location = useLocation();
+    const pathLocal = location.pathname;
 
     const maxLengthText = maxLength(15);
     const post = posts.map(post => {
@@ -45,12 +47,18 @@ function Main({posts, ...props}) {
                 :
                 <Routes>
                     <Route path=":userId" element={
-                        <ProfileInfo infoUser={props.profilePage.infoUser} status={props.status}
-                                     changeStatus={props.changeStatus} updateStatus={props.updateStatus}/>}/>
+                        <ProfileInfo
+                            infoUser={props.profilePage.infoUser} status={props.status} authMe={authMe} pathLocal={pathLocal}
+                            userId={userId} changeStatus={props.changeStatus} updateStatus={props.updateStatus}
+                        />
+                    }/>
                 </Routes>
             }
             <div className={s.posts}>
-                <PostForm addPost={props.addPost}/>
+                {pathLocal === `/profile/${userId}` && authMe
+                    ? <PostForm addPost={props.addPost}/>
+                    : null
+                }
                 {post}
             </div>
         </div>

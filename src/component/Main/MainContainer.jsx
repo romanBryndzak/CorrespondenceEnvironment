@@ -10,6 +10,7 @@ import Main from "./Main";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {GetAuthMe} from "../../redux/selectors";
 
 
 function MainContainer(props) {
@@ -37,6 +38,7 @@ function MainContainer(props) {
 
 const mapStateToProps = (state) => {
     return {
+        authMe:GetAuthMe,
         userId: state.authorization.userId,
         profilePage: state.profilePage,
         posts: state.profilePage.posts,

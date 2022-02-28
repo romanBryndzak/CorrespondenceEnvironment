@@ -16,9 +16,9 @@ let LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.form}>
             <h3>Login</h3>
-            {ReturnFieldForm('email', Input, 'email', s.text, [required])}
-            {ReturnFieldForm('password', Input, 'password', s.text, [required, props.maxLengthPass])}
-            {ReturnFieldForm('remember', Input, 'checkbox', null, null)}
+            {ReturnFieldForm(null,'email','email', Input, 'email', s.text, [required])}
+            {ReturnFieldForm(null,'password','password', Input, 'password', s.text, [required, props.maxLengthPass])}
+            {ReturnFieldForm(null,'remember','remember', Input, 'checkbox', null, null)}
             <div className={props.error ? s.error : ''}>{props.error}</div>
             <button type='submit' onClick={onClick}>Submit</button>
         </form>);
@@ -37,11 +37,11 @@ function Login(props) {
         }
     }
 
-    const maxLengthPass = maxLength(18)
+    const maxLengthPass = maxLength(18);
     let onSubmit = (formData) => {
         let {email, password, remember} = formData
         props.login(email, password, remember);
-    }
+    };
     return (
         <div className={s.wrapper}>
             <ReduxForm onSubmit={onSubmit} maxLengthPass={maxLengthPass}
