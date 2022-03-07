@@ -7,9 +7,13 @@ import {Route, Routes, useLocation} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, requiredTextarea} from "../../auxiliaryTools/fieldValidator";
 import {Textarea} from "../../auxiliaryTools/auxiliaryTools";
+import {useSelector} from "react-redux";
+import {GetAuthMe} from "../../redux/selectors";
 
-function Main({posts, userId, authMe, ...props}) {
-    let location = useLocation();
+function Main({posts, userId, ...props}) {
+
+    const authMe = useSelector(GetAuthMe);
+    const location = useLocation();
     const pathLocal = location.pathname;
 
     const maxLengthText = maxLength(15);

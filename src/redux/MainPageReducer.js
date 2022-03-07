@@ -1,6 +1,7 @@
 import {increaseId} from "../auxiliaryTools/auxiliaryTools";
 import {profileAPI} from "../api/api";
 import {switchIsFetching} from "./usersPageReducer";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "ADD_POST";
 const CHANGE_STATUS = "CHANGE_STATUS";
@@ -102,5 +103,28 @@ export const changeProfileInfo = (profile, userId) => async (dispatch) => {
     const response = await profileAPI.putProfileIfo(profile);
     if (response.data.resultCode === 0) {
         dispatch(getProfile(userId));
+        dispatch(switchIsFetching(false));
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
+        let newMes = message.split(/[()]/);
+        const context = newMes[0];
+        const titleContext1 = newMes[1];
+        let titleContext2 = titleContext1.split(/[->]/);
+        let titleContext = titleContext1.charAt(0).toLowerCase() + titleContext1.slice(1);
+        let titleContextContact = 'contacts';
+        if (titleContext2.length > 1) {
+            let contactTitle = titleContext2[2];
+            titleContext = contactTitle.charAt(0).toLowerCase() + contactTitle.slice(1);
+        }
+
+        function returnError(titleContextContact, titleContext, context) {
+            if (titleContext2.length > 1) {
+                return dispatch(stopSubmit("profileInfo", {[titleContextContact]: {[titleContext]: context}}))
+            } else {
+                return dispatch(stopSubmit("profileInfo", {[titleContext]: context}))
+            }
+        }
+
+        returnError(titleContextContact, titleContext, context);
     }
 };

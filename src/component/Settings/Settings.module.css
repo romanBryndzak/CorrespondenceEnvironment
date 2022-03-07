@@ -1,0 +1,55 @@
+.add {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px gray solid;
+    background: #6495ed;
+    margin: 0 5px 8px;
+    color: white;
+}
+
+.content {
+    font-size: 16px;
+    background: #d4ffdd;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+
+.contacts {
+    margin-left: 5%;
+}
+
+.headlines {
+    border-right: 1px solid gray;
+    margin-right: 8px;
+}
+
+.headlinesText {
+    cursor: pointer;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px;
+    width: fit-content;
+}
+
+.activeSetting {
+    cursor: pointer;
+    color: white;
+    background-color: slategray;
+    border-radius: 5px;
+    padding: 2px;
+    width: fit-content;
+}
+
+.wrapperCustomField {
+    display: flex;
+}
+
+.error {
+    font-size: 12px;
+    border-radius: 10px;
+    border: dashed 1px red;
+    color: crimson;
+    padding: 3px;
+}

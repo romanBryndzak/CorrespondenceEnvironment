@@ -24,7 +24,8 @@
 
 .error {
     font-size: 12px;
-    border-radius: 50%;
+    border-radius: 10px;
     border: dashed 1px red;
     color: crimson;
+    padding: 3px;
 }

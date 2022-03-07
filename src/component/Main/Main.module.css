@@ -84,3 +84,11 @@
 .buttonChangeInfo {
     margin-top: 14px;
 }
+
+.error {
+    font-size: 12px;
+    border-radius: 10px;
+    border: dashed 1px red;
+    color: crimson;
+    padding: 3px;
+}

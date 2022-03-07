@@ -10,7 +10,7 @@ import Main from "./Main";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
-import {GetAuthMe} from "../../redux/selectors";
+import {switchIsFetching} from "../../redux/usersPageReducer";
 
 
 function MainContainer(props) {
@@ -38,7 +38,6 @@ function MainContainer(props) {
 
 const mapStateToProps = (state) => {
     return {
-        authMe:GetAuthMe,
         userId: state.authorization.userId,
         profilePage: state.profilePage,
         posts: state.profilePage.posts,
@@ -49,5 +48,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    addPost, changeStatus, getStatus, updateStatus, getProfile
+    addPost, changeStatus, getStatus, updateStatus, getProfile, switchIsFetching
 })(MainContainer);
