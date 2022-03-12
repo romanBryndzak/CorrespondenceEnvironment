@@ -4,23 +4,30 @@ import {ava} from "../../img/img";
 import Status from "./Status";
 
 
-const ProfileInfo = memo(({userId, infoUser, status, changeStatus, updateStatus, authMe, pathLocal}) => {
+const ProfileInfo = memo((
+    {userId, infoUser, status, changeStatus, updateStatus, authMe, pathLocal, sendPhotoFile}) => {
+
     const {small} = infoUser.photos;
     const {fullName, aboutMe, lookingForAJob, lookingForAJobDescription} = infoUser;
 
     const [changePhoto, setChangePhoto] = useState(false);
 
-    const onChangePhoto = () => {
-        setChangePhoto(true);
+    const onChangePhoto = (e) => {
+        if (e.target.files.length) {
+            sendPhotoFile(e.target.files[0]);
+            setChangePhoto(true);
+        }
     };
 
     return (
         <div className={s.content}>
             <div>
                 <div>
-                    <img src={small !== null ? small : ava} alt="ava" onClick={onChangePhoto}/>
+                    <img src={small !== null ? small : ava} alt="ava"/>
                 </div>
-                {pathLocal === `/profile/${userId}` && authMe ? <input type="file"/> : null}
+                {pathLocal === `/profile/${userId}` && authMe
+                    ? <input type="file" onChange={onChangePhoto}/>
+                    : null}
                 <Status status={status} userId={userId} authMe={authMe} pathLocal={pathLocal}
                         changeStatus={changeStatus} updateStatus={updateStatus}
                 />

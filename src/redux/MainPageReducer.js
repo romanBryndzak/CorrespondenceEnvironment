@@ -8,12 +8,14 @@ const CHANGE_STATUS = "CHANGE_STATUS";
 const SET_STATUS = "SET_STATUS";
 const ADD_INFO_USER = "ADD_INFO_USER";
 const DISABLE_NAV_LINK_SIDEBAR = 'DISABLE_NAV_LINK_SIDEBAR';
+const SET_SAVE_PHOTO = 'SET_SAVE_PHOTO';
 
 export const setDisableNavLinkSidebar = (value) => ({type: DISABLE_NAV_LINK_SIDEBAR, value: value});
 export const addPost = (newText) => ({type: ADD_POST, newText: newText});
 export const changeStatus = (newText) => ({type: CHANGE_STATUS, newText: newText});
 export const setStatus = (status) => ({type: SET_STATUS, newStatus: status});
 export const addInfoUser = (infoUser) => ({type: ADD_INFO_USER, infoUser: infoUser});
+export const setSavePhoto = (photos) => ({type: SET_SAVE_PHOTO, photos: photos});
 
 const initialState = {
     status: "",
@@ -72,6 +74,9 @@ const mainPageReducer = (mainPage = initialState, action) => {
         case DISABLE_NAV_LINK_SIDEBAR:
             return {...mainPage, disableNavLinkSidebar: action.value};
 
+        case SET_SAVE_PHOTO:
+            return {...mainPage, photos: action.photos};
+
         default:
             return mainPage;
     }
@@ -96,6 +101,13 @@ export const updateStatus = (status) => async (dispatch) => {
     const response = await profileAPI.putStatus(status);
     if (response.status === 200) {
         dispatch(setStatus(status));
+    }
+};
+
+export const sendPhotoFile = (photo) => async (dispatch) => {
+    const response = await profileAPI.putPhoto(photo);
+    if (response.data.resultCode === 0) {
+        dispatch(setSavePhoto(response.data.data.photos));
     }
 };
 

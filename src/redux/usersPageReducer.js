@@ -30,7 +30,7 @@ const updateUserFollowing = (items, itemId, newObjectProps) => {
 
 const initialState = {
     member: [],
-    amountUsers: 10,
+    amountUsers: 15,
     countUsers: null,
     activePage: null,
     isFetching: false,

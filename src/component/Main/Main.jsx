@@ -52,6 +52,7 @@ function Main({posts, userId, ...props}) {
                 <Routes>
                     <Route path=":userId" element={
                         <ProfileInfo
+                            sendPhotoFile={props.sendPhotoFile}
                             infoUser={props.profilePage.infoUser} status={props.status} authMe={authMe} pathLocal={pathLocal}
                             userId={userId} changeStatus={props.changeStatus} updateStatus={props.updateStatus}
                         />

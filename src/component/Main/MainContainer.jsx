@@ -4,6 +4,7 @@ import {
     changeStatus,
     getProfile,
     getStatus,
+    sendPhotoFile,
     updateStatus,
 } from "../../redux/MainPageReducer";
 import Main from "./Main";
@@ -48,5 +49,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    addPost, changeStatus, getStatus, updateStatus, getProfile, switchIsFetching
+    addPost, changeStatus, getStatus, updateStatus, getProfile, switchIsFetching, sendPhotoFile
 })(MainContainer);

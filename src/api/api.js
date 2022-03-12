@@ -50,6 +50,15 @@ export const profileAPI = {
     putStatus(status) {
         return (instance.put(`profile/status`, {status: status}));
     },
+    putPhoto(photo) {
+        let formData = new FormData();
+        formData.append("image",photo);
+        return (instance.put(`profile/photo`, formData, {
+            headers:{
+                "Content-Type" : "multipart/form-data"
+            }
+        }));
+    },
     putProfileIfo(profile) {
         return (instance.put(`profile`, profile));
     },

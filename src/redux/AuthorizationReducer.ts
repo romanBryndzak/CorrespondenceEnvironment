@@ -4,11 +4,25 @@ import {stopSubmit} from "redux-form";
 
 const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
-export const setUserAuthorization = (userId, email, login, authMe) => (
-    {type: USER_AUTHORIZATION, data: {userId, email, login, authMe}}
-);
+type setUserAuthorizationType = {
+    type: typeof USER_AUTHORIZATION,
+    data: { userId: number | null, email: string | null, login:  string | null, authMe: boolean },
+}
 
-const initialState = {
+export const setUserAuthorization =
+    (userId: number | null, email: string | null, login: string | null, authMe: boolean): setUserAuthorizationType => (
+        {type: USER_AUTHORIZATION, data: {userId, email, login, authMe}}
+    );
+
+export type authStateType = {
+    userId: null | number,
+    email: number | null,
+    login: string | null,
+    authMe: boolean,
+    isFetchingAuth: boolean,
+}
+
+const initialState: authStateType = {
     userId: null,
     email: null,
     login: null,
@@ -17,7 +31,7 @@ const initialState = {
 };
 
 
-const AuthorizationReducer = (authorizationPage = initialState, action) => {
+const AuthorizationReducer = (authorizationPage = initialState, action: any) => {
     switch (action.type) {
 
         case USER_AUTHORIZATION:
@@ -31,7 +45,7 @@ const AuthorizationReducer = (authorizationPage = initialState, action) => {
     }
 };
 
-export const getAuthMe = () => async (dispatch) => {
+export const getAuthMe = () => async (dispatch: any) => {
     dispatch(switchIsFetching(true));
     const response = await authMeAPI.getAuthMe();
     dispatch(switchIsFetching(false));
@@ -43,7 +57,7 @@ export const getAuthMe = () => async (dispatch) => {
 
 };
 
-export const login = (email, password, rememberMe) => async (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
     const response = await authMeAPI.login(email, password, rememberMe);
     if (response.data.resultCode === 0) {
         dispatch(getAuthMe());
@@ -53,10 +67,10 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
     }
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: any) => {
     const response = await authMeAPI.logout();
     if (response.data.resultCode === 0) {
-        dispatch(setUserAuthorization({id: null, email: null, login: null, authMe: false}));
+        dispatch(setUserAuthorization(null, null, null, false));
     }
 };
 
