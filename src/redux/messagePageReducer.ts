@@ -20,12 +20,12 @@ type messagesType = {
     message: string,
 };
 
-const initialStateType = {
-    users: [] as Array<usersType>,
-    messages: [] as Array<messagesType>,
-};
+// const initialStateType = {
+//     users: [] as Array<usersType>,
+//     messages: [] as Array<messagesType>,
+// };
 
-const initialState: typeof initialStateType = {
+/*const initialState: typeof initialStateType = {
     users: [
         {id: 1, name: "Roman", lastName: "Bryndzak"},
         {id: 2, name: "Maryna", lastName: "Bryndzak"},
@@ -35,9 +35,23 @@ const initialState: typeof initialStateType = {
         {id: 0, message: "Hello people!"},
         {id: 1, message: "Hi friend!"},
     ]
+};*/
+
+const initialState = {
+    users: [
+        {id: 1, name: "Roman", lastName: "Bryndzak"},
+        {id: 2, name: "Maryna", lastName: "Bryndzak"},
+        {id: 3, name: "Rostyslav", lastName: "Bryndzak"},
+    ] as Array<usersType>,
+    messages: [
+        {id: 0, message: "Hello people!"},
+        {id: 1, message: "Hi friend!"},
+    ] as Array<messagesType>
 };
 
-const messagePageReducer = (messagesPage = initialState, action: any) => {
+export type initialStateType = typeof initialState;
+
+const messagePageReducer = (messagesPage = initialState, action: any): initialStateType => {
 
     switch (action.type) {
         case  ADD_MESSAGE: {

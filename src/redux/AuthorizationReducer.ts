@@ -6,7 +6,7 @@ const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
 type setUserAuthorizationType = {
     type: typeof USER_AUTHORIZATION,
-    data: { userId: number | null, email: string | null, login:  string | null, authMe: boolean },
+    data: { userId: number | null, email: string | null, login: string | null, authMe: boolean },
 }
 
 export const setUserAuthorization =
@@ -14,24 +14,25 @@ export const setUserAuthorization =
         {type: USER_AUTHORIZATION, data: {userId, email, login, authMe}}
     );
 
-export type authStateType = {
-    userId: null | number,
-    email: number | null,
-    login: string | null,
-    authMe: boolean,
-    isFetchingAuth: boolean,
-}
+// export type authStateType = {
+//     userId: null | number,
+//     email: number | null,
+//     login: string | null,
+//     authMe: boolean,
+//     isFetchingAuth: boolean,
+// }
 
-const initialState: authStateType = {
-    userId: null,
-    email: null,
-    login: null,
+const initialState = {
+    userId: null as null | number,
+    email: null as number | null,
+    login: null as string | null,
     authMe: false,
     isFetchingAuth: false,
 };
 
+export type authStateType = typeof initialState;
 
-const AuthorizationReducer = (authorizationPage = initialState, action: any) => {
+const AuthorizationReducer = (authorizationPage = initialState, action: any): authStateType => {
     switch (action.type) {
 
         case USER_AUTHORIZATION:
