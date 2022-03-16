@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {reduxForm} from "redux-form";
 import s from './login.module.css';
 import {Input, ReturnFieldForm} from "../../auxiliaryTools/auxiliaryTools";
@@ -8,19 +8,22 @@ import {login} from "../../redux/AuthorizationReducer";
 import {useNavigate} from "react-router-dom";
 import {setDisableNavLinkSidebar} from "../../redux/MainPageReducer";
 
-let LoginForm = (props) => {
+let LoginForm = ({handleSubmit, error, captchaUrl, maxLengthPass, setDisableNavLinkSidebar}) => {
+
     function onClick() {
-        props.setDisableNavLinkSidebar(true);
+        setDisableNavLinkSidebar(true);
     }
 
     return (
-        <form onSubmit={props.handleSubmit} className={s.form}>
+        <form onSubmit={handleSubmit} className={s.form}>
             <h3>Login</h3>
-            {ReturnFieldForm(null,'email','email', Input, 'email', s.text, [required])}
-            {ReturnFieldForm(null,'password','password', Input, 'password', s.text, [required, props.maxLengthPass])}
-            {ReturnFieldForm(null,'remember','remember', Input, 'checkbox', null, null)}
-            <div className={props.error ? s.error : ''}>{props.error}</div>
-            <button type='submit' onClick={onClick}>Submit</button>
+            {ReturnFieldForm(null, 'email', 'email', Input, 'email', s.text, [required])}
+            {ReturnFieldForm(null, 'password', 'password', Input, 'password', s.text, [required, maxLengthPass])}
+            {ReturnFieldForm(null, 'remember', 'remember', Input, 'checkbox', null, null)}
+            {captchaUrl && <img src={captchaUrl} alt=''/>}
+            {captchaUrl && ReturnFieldForm(null, 'context captcha', 'captcha', Input, 'text', null, null)}
+            <div className={error ? s.error : ''}>{error}</div>
+            <button type='submit'  onClick={onClick}>Submit</button>
         </form>);
 };
 
@@ -39,12 +42,13 @@ function Login(props) {
 
     const maxLengthPass = maxLength(18);
     let onSubmit = (formData) => {
-        let {email, password, remember} = formData
-        props.login(email, password, remember);
+        let {email, password, remember, captcha} = formData
+        props.login(email, password, remember, captcha);
+        console.log(email, password, remember, captcha)
     };
     return (
         <div className={s.wrapper}>
-            <ReduxForm onSubmit={onSubmit} maxLengthPass={maxLengthPass}
+            <ReduxForm onSubmit={onSubmit} maxLengthPass={maxLengthPass} captchaUrl={props.captchaUrl}
                        setDisableNavLinkSidebar={props.setDisableNavLinkSidebar}
             />
         </div>
@@ -55,6 +59,7 @@ const mapStateToProps = (state) => {
     return {
         id: state.authorization.userId,
         authMe: state.authorization.authMe,
+        captchaUrl: state.authorization.captchaUrl,
     };
 };
 
