@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {reduxForm} from "redux-form";
 import s from './login.module.css';
 import {Input, ReturnFieldForm} from "../../auxiliaryTools/auxiliaryTools";
@@ -23,7 +23,7 @@ let LoginForm = ({handleSubmit, error, captchaUrl, maxLengthPass, setDisableNavL
             {captchaUrl && <img src={captchaUrl} alt=''/>}
             {captchaUrl && ReturnFieldForm(null, 'context captcha', 'captcha', Input, 'text', null, null)}
             <div className={error ? s.error : ''}>{error}</div>
-            <button type='submit'  onClick={onClick}>Submit</button>
+            <button type='submit' onClick={onClick}>Submit</button>
         </form>);
 };
 

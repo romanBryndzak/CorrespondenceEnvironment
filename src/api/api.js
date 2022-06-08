@@ -33,6 +33,7 @@ export const authMeAPI = {
         return (instance.get(`auth/me`));
     },
     login(email, password, rememberMe, captcha) {
+        console.log(email,password,rememberMe,captcha)
         return (instance.post(`auth/login`, {email, password, rememberMe, captcha}));
     },
     logout() {
